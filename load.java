@@ -3,36 +3,71 @@ package group_project;
 import java.io.IOException;
 
 public class load {
-
-	public static void main(String[] args) {
-		int[][] newRooms;
-		try {
-			newRooms = loader("small.maze");
-			for (int x=0;x<3;x++){
-				for (int y=0;y<3;y++){
-					System.out.println(newRooms[x][y]);
-				}
-			}
-		} catch (IOException e) {
-			System.out.println("broke");
-		}
-
-	}
-	public static int[][] loader(String filename) throws IOException{
+	
+	public static room[][] newMap(String filename) throws IOException{
+		//gets string
 		String rawData= FileRead.open(filename);//gets string of maze file
+		int size=(int) Math.sqrt(rawData.length());//maze will be a square
 		
-		int size=(int) Math.sqrt(filename.length());//maze will be a square
-		if ((double)size!=Math.sqrt(filename.length())){
+		if ((size*size)!=(rawData.length())){
 			throw new IOException();
 		}
+		
+		//gets int[][]		
 		int[][] layout= new int[size][size];
 		
 		for (int x=0;x<size;x++){
 			for (int y=0;y<size;y++){
-				layout[x][y]=Character.digit(rawData.charAt((x*3)+y),10);
+				layout[x][y]=Character.digit(rawData.charAt((x*size)+y),10);
 			}
 		}
-		return layout;
+		
+		//gets room[][]
+		room[][] Rooms = new room[size][size];
+		boolean N, S,E,W;
+		for (int x=0;x<size;x++){
+			for (int y=0;y<size;y++){
+				//north
+				if(x==0){
+					N=false;
+				}else if(layout[x-1][y]<1){
+					N=false;
+				}else{
+					N=true;
+				}
+				//south
+				if(x==size-1){
+					S=false;
+				}else if(layout[x+1][y]<1){
+					S=false;
+				}else{
+					S=true;
+				}
+				//east
+				if(y==size-1){
+					E=false;
+				}else if(layout[x][y+1]<1){
+					E=false;
+				}else{
+					E=true;
+				}
+				//west
+				if(y==0){
+					W=false;
+				}else if(layout[x][y-1]<1){
+					W=false;
+				}else{
+					W=true;
+				}
+				Rooms[x][y]= new room(N,S,E,W);
+				if(layout[x][y]==2){
+					Rooms[x][y].setEntrance(true);
+				}
+				if(layout[x][y]==3){
+					Rooms[x][y].SetExit(true);
+				}
+			}
+		}
+		return Rooms;
 	}
-
 }
