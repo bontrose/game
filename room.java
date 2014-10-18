@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+package group_project;
 
 public class room{
    private boolean North, South, East, West;
