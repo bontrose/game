@@ -3,6 +3,7 @@ package group_project;
 public class room{
    private boolean North, South, East, West;
    private boolean Sleep, Search, Fight = false;
+   private boolean Start, End = false;
    private boolean Wall = false;//kinda thought of the fact that we may need to check if this is a room or a wall
    private FlizbazArrayList monsters;
    
@@ -19,14 +20,18 @@ public class room{
       West=w;
    }
    public room(){
-      setWall();
+      setWall(true);
    }
-   public void setWall(){//set as wall when init
-      Wall=true;
-      North = false;
-      South = false;
-      East = false;
-      West= false;
+   public void setWall(boolean yn){//set as wall when init
+	  if (yn){
+	      Wall=true;
+	      North = false;
+	      South = false;
+	      East = false;
+	      West= false;
+	   }else{
+		   Wall=false;
+	   }
    }
    public boolean isWall(){
 	   return Wall;
@@ -85,6 +90,12 @@ public class room{
    public void sleep(){
 	   Sleep=true;
    }
+   public void setEntrance(boolean e){
+	   Start=e;
+   }
+   public void SetExit(boolean e){
+	   End=e;
+   }
    //get other items
    public boolean isLooted(){
       return Search;
@@ -94,5 +105,11 @@ public class room{
    }
    public boolean slept(){
 	   return Sleep;
+   }
+   public boolean isEntrance(){
+	   return Start;
+   }
+   public boolean isExit(){
+	   return End;
    }
 }
