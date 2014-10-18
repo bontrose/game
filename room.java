@@ -28,6 +28,9 @@ public class room{
       East = false;
       West= false;
    }
+   public boolean isWall(){
+	   return Wall;
+   }
    //setting north either int or bool
    public void setNorth(int n){
       if(n>0){
@@ -73,16 +76,23 @@ public class room{
       West=w;
    }
    //set other items
-   public void setLooted(bool looked){
+   public void setLooted(boolean looked){
       Search=looked;
    }
    public void setmonsters(FlizbazArrayList newMonster){
       monsters = newMonster;
    }
+   public void sleep(){
+	   Sleep=true;
+   }
    //get other items
    public boolean isLooted(){
       return Search;
    }
-   
-   
+   public FlizbazArrayList getmonsters(){
+	   return monsters;
+   }
+   public boolean slept(){
+	   return Sleep;
+   }
 }
