@@ -1,6 +1,6 @@
 package group_project;
 
-public abstract class Character 
+public abstract class chars
 {
 	protected int strength;
 	protected int intelligence;
