@@ -1,7 +1,11 @@
 package group_project;
 
 public class Stack<E> {
-	FlizbazArrayList<E> arrayList = new FlizbazArrayList<E>();
+	private FlizbazArrayList<E> arrayList;
+	public Stack(){
+		arrayList = new FlizbazArrayList<E>();
+	}
+
 	public E push(E element)
 	{
 		arrayList.add(element);
