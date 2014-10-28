@@ -33,6 +33,16 @@ public class NonPlayerCharacter extends characters
 			hasWeapon = false;
 		}
 		
+		int chanceOfHavingArmor = random.nextInt(3);
+		if(chanceOfHavingArmor == 3)
+		{
+			hasArmor = true;
+		}
+		else
+		{
+			hasArmor = false;
+		}
+		
 		monsterGroup.add(this);
 	}
 	
