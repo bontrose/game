@@ -22,6 +22,17 @@ public class NonPlayerCharacter extends characters
 		}
 		
 		//set name and stats from file using String tokenizer
+		
+		int chanceOfHavingWeapon = random.nextInt(3);
+		if(chanceOfHavingWeapon == 3)
+		{
+			hasWeapon = true;
+		}
+		else
+		{
+			hasWeapon = false;
+		}
+		
 		monsterGroup.add(this);
 	}
 	
