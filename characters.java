@@ -15,9 +15,12 @@ public abstract class characters
 //	public static FlizbazArrayList<NonPlayerCharacter> monsters2 = new FlizbazArrayList<NonPlayerCharacter>();
 //	public static FlizbazArrayList<NonPlayerCharacter> monsters3 = new FlizbazArrayList<NonPlayerCharacter>();
 	
-	// set default values for Item(String itemName, boolean isArmor, boolean isWeapon, int durability, int modifier)
+	// set default values for public Item(String itemName, boolean isArmor, 
+	//	    boolean isWeapon, boolean isRanged, int durability, int modifier)
 	protected Item weapon = new Item(null, false, true, false, 5, 0); 
 	protected Item armor = new Item(null, true, false, false, 5, 0);
+	
+	protected Stack<Item> itemStack = new Stack<Item>();
 	
 	public int getStrength() 
 	{
@@ -109,70 +112,39 @@ public abstract class characters
 		this.armor = armor;
 	}
 	
-	//--------------------------------------------------------------------------------
-	// implement fight() in subclasses
-	// for PC:  gives options(melee/range attack/spell) and calls a method accordingly
-	// for NPC: automatically (maybe randomly) selects an attack (based on if they have a 
-	// 		 	weapon) (random chance of knowing a spell)
-	//--------------------------------------------------------------------------------
-	
-	public abstract void fight();
-	
 	//-------------------------------------------------------------------
 	// implement attack methods for both PCs and NPCs 
 	// they return the amount of damage dealt
 	// validate that the player is able to use them before calling
 	//-------------------------------------------------------------------
 	
-	public abstract int meleeAttack(characters target, int targetID); // no restrictions
+	public abstract int meleeAttack(characters target, int targetID); // no restrictions, can use melee weapon or no weapon
 	
-//	Ideas for implementation:
-//	{
-//		// generate a randomNumber between 1 and 20
-//		if (randomNumber < dexterity) // check for hit or miss
-//		{
-//			return 0;				  // player missed
-//		}
-//		int damage;
-//		if(hasWeapon)
-//		{
-//			damage = (strength/3) + weapon.getModifier() - armor.getModifier();
-//		}
-//		else
-//		{
-//			damage = (strength/3);
-//		}
-//		return damage;
-//	}
 	
-	public abstract int rangeAttack(characters target, int targetID); // must have weapon to use
+	public abstract int rangeAttack(characters target, int targetID); // must have a range weapon to use
 
-//	Ideas for implementation:
-//	{
-//		
-//		if(hasWeapon == false)
-//		{
-//			throw new IllegalStateException();
-//		}
-//	  	// generate a randomNumber between 1 and 15
-//		if (randomNumber < dexterity) // check for hit or miss
-//		{
-//			return 0;				  // player missed
-//		}
-//		int damage = (strength/3) + weapon.getModifier() - armor.getModifier();
-//		return damage;
-//	}
 
-	public abstract int castSpell();	// maybe public int castSpell(Spell spellName)?
-										// must know a spell to use
+	public abstract int castSpell();	// must know a spell to use									
 	
-//	Ideas for implementation:
-// 	damage = spellName.getDamage(); 
-// 	We should make a Spell class for the number of rounds to learn
-// 	each spell, the amount a damage each spell does, the name, etc.
+	public void changeHP(int changeInHP)
+	{
+		if (changeInHP > 0)
+		{
+			currentHP += changeInHP; // adds health from potion
+		}
+		else
+		{
+			currentHP -= changeInHP; // takes damage
+		}
+	}
 	
 	public abstract void destruct();
 	
 	//If currentHP < 0, remove from arraylist
+	
+	public void addItemToStack(Item item)
+	{
+		itemStack.push(item); // pushes dead player's item on stack
+	}
 
 }
