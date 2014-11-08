@@ -1,0 +1,28 @@
+Int	Dex	Str
+0	0	0	Rabbit
+0	0	1	Pig
+0	0	2	Troll
+0	1	0	Snake
+0	1	1	Goblin-Baby
+0	1	2	Ogre
+0	2	0	Road-Runner
+0	2	1	Asp
+0	2	2	Cheetah
+1	0	0	Wizard
+1	0	1	Giant Slug
+1	0	2	Ox
+1	1	0	Drowsy Goblin
+1	1	1	Goblin
+1	1	2	Goblin Soldier
+1	2	0	Giant Spider
+1	2	1	Goblin Archer
+1	2	2	Lion
+2	0	0	Grand Master Wizard
+2	0	1	Lich
+2	0	2	Illithid
+2	1	0	Fire Elemental
+2	1	1	Goblin Wizard
+2	1	2	Goblin Chief
+2	2	0	Lightning Elemental
+2	2	1	Skulk
+2	2	2	Rabbit of Caerbannog
