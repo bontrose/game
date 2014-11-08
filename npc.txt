@@ -1,0 +1,63 @@
+this is just a reference file.
+I= intellegence
+D= Dexterity(speed)
+S= Strength
+HP= hit points
+
+string s;
+if(hp<8){
+s="Half dead ";
+}else if(hp>12){
+s="Angry ";
+}else{
+s="";
+}
+
+int str;
+if(strength<8){
+str=0;
+}else if(strength>12){
+str=2;
+}else{
+str=3;
+}
+I.D.S
+
+0.0.0=rabbit
+0.0.1=pig
+0.0.2=troll
+
+0.1.0=snake
+0.1.1=gobbo
+0.1.2=ogre
+
+0.2.0=roadrunner
+0.2.1=asp
+0.2.2=cheetah
+
+1.0.0=wizard
+1.0.1=giant slug
+1.0.2=ox
+
+1.1.0=drowsy goblin
+1.1.1=average goblin
+1.1.2=goblin soldier
+
+1.2.0=giant spider
+1.2.1=goblin archer
+1.2.2=lion
+
+2.0.0=Grand Master Wizard
+2.0.1=lich
+2.0.2=illithid
+
+2.1.0=fire elemental
+2.1.1=goblin wizard
+2.1.2=goblin chief
+
+2.2.0=lighting elemental
+2.2.1=skulk
+2.2.2=Rabbit of Caerbannog
+
+pc:3d6
+npc:1d6d3
