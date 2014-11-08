@@ -7,7 +7,7 @@ public class UserInputClassJF
 	public void sleep()
 	{
 		PlayerCharacter pc = new PlayerCharacter(0, null);
-		pc.hasSlept = true; // add boolean hasSlept to PC
+		pc.setHasSlept(true);
 		Random random = new Random();
 		String fileName = null;
 		FlizbazArrayList<NonPlayerCharacter> monsterGroup = null;
@@ -17,15 +17,15 @@ public class UserInputClassJF
 		
 		switch(chanceOfMonstersGroup)
 		{
-		case 1 : monsterGroup = characters.monsters1;
+		case 0 : monsterGroup = characters.monsters1;
 			break;
-		case 2 : monsterGroup = characters.monsters2;
+		case 1 : monsterGroup = characters.monsters2;
 			break;
-		case 3 : monsterGroup = characters.monsters3;
+		case 2 : monsterGroup = characters.monsters3;
 			break;
 		}
 		
-		if(chanceOfMonstersAppearing == 6)
+		if(chanceOfMonstersAppearing == 5)
 		{
 			NonPlayerCharacter npc = new NonPlayerCharacter(fileName, monsterGroup);
 		}

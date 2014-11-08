@@ -24,7 +24,7 @@ public class NonPlayerCharacter extends characters
 		//set name and stats from file using String tokenizer
 		
 		int chanceOfHavingWeapon = random.nextInt(3);
-		if(chanceOfHavingWeapon == 3)
+		if(chanceOfHavingWeapon == 2)
 		{
 			hasWeapon = true;
 		}
@@ -34,7 +34,7 @@ public class NonPlayerCharacter extends characters
 		}
 		
 		int chanceOfHavingArmor = random.nextInt(3);
-		if(chanceOfHavingArmor == 3)
+		if(chanceOfHavingArmor == 2)
 		{
 			hasArmor = true;
 		}
@@ -48,7 +48,7 @@ public class NonPlayerCharacter extends characters
 	
 	public void setNumOfNPCs()
 	{
-		numOfNPCs = random.nextInt(6);
+		numOfNPCs = random.nextInt(7);
 	}
 
 	public int getNumOfNPCs()
