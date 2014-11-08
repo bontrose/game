@@ -57,5 +57,38 @@ public class game {
 		}
 		in.close();
 	}
+	
+	int x = 0;
+	int y = 0; // position
+	
+	public void sleep()
+	{
+		PlayerCharacter pc = new PlayerCharacter(0, null);
+		map[x][y].sleep();
+		Random random = new Random();
+		FlizbazArrayList<NonPlayerCharacter> monsterGroup = null;
+		
+		int chanceOfMonstersGroup = random.nextInt(3);
+		int chanceOfMonstersAppearing = random.nextInt(6);
+		
+		switch(chanceOfMonstersGroup)
+		{
+		case 0 : monsterGroup = characters.monsters1;
+			break;
+		case 1 : monsterGroup = characters.monsters2;
+			break;
+		case 2 : monsterGroup = characters.monsters3;
+			break;
+		}
+		
+		if(chanceOfMonstersAppearing == 5)
+		{
+			NonPlayerCharacter npc = new NonPlayerCharacter(monsterGroup);
+		}
+		else
+		{
+			pc.currentHP += 1;
+		}
+	}
 
 }
