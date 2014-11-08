@@ -9,6 +9,34 @@ public class NonPlayerCharacter extends characters
 	Random random = new Random(); 
 	private int numOfNPCs;
 	private String monsterName;
+	private String attackType;
+	
+	NonPlayerCharacter(FlizbazArrayList<NonPlayerCharacter> monsterGroup)
+	{
+		//set name and stats from file using String tokenizer
+		
+				int chanceOfHavingWeapon = random.nextInt(3);
+				if(chanceOfHavingWeapon == 2)
+				{
+					hasWeapon = true;
+				}
+				else
+				{
+					hasWeapon = false;
+				}
+				
+				int chanceOfHavingArmor = random.nextInt(3);
+				if(chanceOfHavingArmor == 2)
+				{
+					hasArmor = true;
+				}
+				else
+				{
+					hasArmor = false;
+				}
+				
+				monsterGroup.add(this);
+	}
 	
 	NonPlayerCharacter(String filename, FlizbazArrayList<NonPlayerCharacter> monsterGroup){
 		

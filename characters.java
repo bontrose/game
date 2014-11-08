@@ -11,9 +11,9 @@ public abstract class characters
 	protected boolean hasArmor;
 	
 	public static FlizbazArrayList<PlayerCharacter> party = new FlizbazArrayList<PlayerCharacter>();
-//	public static FlizbazArrayList<NonPlayerCharacter> monsters1 = new FlizbazArrayList<NonPlayerCharacter>();
-//	public static FlizbazArrayList<NonPlayerCharacter> monsters2 = new FlizbazArrayList<NonPlayerCharacter>();
-//	public static FlizbazArrayList<NonPlayerCharacter> monsters3 = new FlizbazArrayList<NonPlayerCharacter>();
+	public static FlizbazArrayList<NonPlayerCharacter> monsters1 = new FlizbazArrayList<NonPlayerCharacter>();
+	public static FlizbazArrayList<NonPlayerCharacter> monsters2 = new FlizbazArrayList<NonPlayerCharacter>();
+	public static FlizbazArrayList<NonPlayerCharacter> monsters3 = new FlizbazArrayList<NonPlayerCharacter>();
 	
 	// set default values for public Item(String itemName, boolean isArmor, 
 	//	    boolean isWeapon, boolean isRanged, int durability, int modifier)

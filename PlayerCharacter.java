@@ -44,11 +44,11 @@ public class PlayerCharacter extends characters {
 	//	dice.ints(1, 6);
 		int statTotal = 0;
 		statTotal += dice.nextInt(6);
-		System.out.println("First roll: " + statTotal);
+//		System.out.println("First roll: " + statTotal);
 		statTotal += dice.nextInt(6);
-		System.out.println("Second roll: " + statTotal);
+//		System.out.println("Second roll: " + statTotal);
 		statTotal += dice.nextInt(6);
-		System.out.println("Third roll: " + statTotal);
+//		System.out.println("Third roll: " + statTotal);
 	
 		return statTotal;
 	}
@@ -87,7 +87,7 @@ public class PlayerCharacter extends characters {
 		party.remove(this);
 	}
 
-	public boolean isHasSlept() {
+	public boolean getHasSlept() {
 		return hasSlept;
 	}
 
