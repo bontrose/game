@@ -6,7 +6,6 @@ public class PlayerCharacter extends characters {
 	
 	Random dice = new Random(); 
 	private boolean hasPotion;
-	private boolean hasSlept;
 	private String characterName = "";
 	
 	PlayerCharacter(int characterClass, String characterName){
@@ -87,11 +86,4 @@ public class PlayerCharacter extends characters {
 		party.remove(this);
 	}
 
-	public boolean getHasSlept() {
-		return hasSlept;
-	}
-
-	public void setHasSlept(boolean hasSlept) {
-		this.hasSlept = hasSlept;
-	}
 }
