@@ -5,16 +5,21 @@ import java.util.*;
 
 
 public class game {
-	public static room[][] map;
-	public static FlizbazArrayList<PlayerCharacter> Players;
-	public static FlizbazArrayList<NonPlayerCharacter> Monsters;
+	static room[][] map;
+	static FlizbazArrayList<PlayerCharacter> Players;
+	static FlizbazArrayList<NonPlayerCharacter> Monsters;
+	static int cash=0;
+	static char d;
+	static int x = 0;
+	static int y = 0; // position
+	static Random Die = new Random();
 	
 	
 	public static void main(String[] args) {
 		init();
 
 	}
-	public static void init(){
+	public static void init(){//makes players, rooms, finds what room to start in
 		boolean mapped=false;
 		String name;
 		int PCnum=0;
@@ -38,9 +43,10 @@ public class game {
 				in = new Scanner(System.in);
 			}
 		}while (PCnum<1||PCnum>6);
-		//PlayerCharacter player
-		for(int x=0; x<PCnum; x++){
-			System.out.print("player "+(x+1)+" name: ");
+		PlayerCharacter playa;
+		Players= new FlizbazArrayList(PCnum);
+		for(int x2=0; x2<PCnum; x2++){
+			System.out.print("player "+(x2+1)+" name: ");
 			name=in.next();
 			System.out.println("0:Fighter");
 			System.out.println("1:Theif");
@@ -53,42 +59,77 @@ public class game {
 					in = new Scanner(System.in);
 				}
 			}while (claz<0||claz>2);
-			//Players.add(element)
+			playa = new PlayerCharacter(claz, name);
+			Players.add(playa);
 		}
 		in.close();
+		for(int x2=0;x2<map.length;x2++){
+			for(int y2=0;y2<map.length;y2++){
+				if(map[x][y].isEntrance()){
+					x=x2;
+					y=y2;
+				}
+			}
+		}
 	}
 	
-	int x = 0;
-	int y = 0; // position
-	
-	public void sleep()
-	{
+	public void sleep(){//
 		PlayerCharacter pc = new PlayerCharacter(0, null);
 		map[x][y].sleep();
-		Random random = new Random();
-		FlizbazArrayList<NonPlayerCharacter> monsterGroup = null;
+		FlizbazArrayList<NonPlayerCharacter> Monsters = null;
 		
-		int chanceOfMonstersGroup = random.nextInt(3);
-		int chanceOfMonstersAppearing = random.nextInt(6);
+		int chanceOfMonstersGroup = Die.nextInt(3);
+		int chanceOfMonstersAppearing = Die.nextInt(6);
 		
 		switch(chanceOfMonstersGroup)
 		{
-		case 0 : monsterGroup = characters.monsters1;
+		case 0 : Monsters = characters.monsters1;
 			break;
-		case 1 : monsterGroup = characters.monsters2;
+		case 1 : Monsters = characters.monsters2;
 			break;
-		case 2 : monsterGroup = characters.monsters3;
+		case 2 : Monsters = characters.monsters3;
 			break;
 		}
 		
 		if(chanceOfMonstersAppearing == 5)
 		{
-			NonPlayerCharacter npc = new NonPlayerCharacter(monsterGroup);
+			NonPlayerCharacter npc = new NonPlayerCharacter(Monsters);
 		}
 		else
 		{
 			pc.currentHP += 1;
 		}
 	}
-
+	public static void move(char d2){
+		d2=Character.toUpperCase(d2);
+		if(d2=='N'){
+			x-=1;
+			d='S';
+		} else if(d2=='S'){
+			x+=1;
+			d='N';
+		} else if(d2=='E'){
+			y+=1;
+			d='W';
+		} else if(d2=='W'){
+			y-=1;
+			d='E';
+		} else{
+			
+		}
+	}
+	public static void run(){
+		//call the hit, capeesh?
+		map[x][y].setmonsters(Monsters);
+		move(d);
+		
+	}
+	public static int search(int wisdom){
+		int cash=Die.nextInt(20)+1;
+		map[x][y].setLooted(true);
+		if (wisdom<cash){
+			cash=0;
+		}
+		return cash;
+	}
 }
