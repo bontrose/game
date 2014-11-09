@@ -112,4 +112,16 @@ public class room{
    public boolean isExit(){
 	   return End;
    }
+   public boolean isEast(){
+	   return East;
+   }
+   public boolean isWest(){
+	   return West;
+   }
+   public boolean isNorth(){
+	   return North;
+   }
+   public boolean isSouth(){
+	   return South;
+   }
 }

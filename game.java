@@ -17,7 +17,41 @@ public class game {
 	
 	public static void main(String[] args) {
 		init();
-
+		boolean quit=false;
+		boolean turnused=false;
+		Scanner in = new Scanner(System.in);
+		String yn="";
+		do{
+			if(!turnused&&!map[x][y].isLooted()){
+				System.out.print("would you like to loot? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					//search(10);
+				}
+			}
+			if(!turnused&&map[x][y].isExit()){
+				System.out.print("would you like to Exit? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					quit=true;
+				}
+			}
+			if(!turnused&&map[x][y].isEast()){
+				System.out.print("would you like to Exit? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					//move(e);
+				}
+			}
+			
+		}while(!quit);
+		System.out.println("thank you for playing!");
 	}
 	public static void init(){//makes players, rooms, finds what room to start in
 		boolean mapped=false;
@@ -71,65 +105,5 @@ public class game {
 				}
 			}
 		}
-	}
-	
-	public void sleep(){//
-		PlayerCharacter pc = new PlayerCharacter(0, null);
-		map[x][y].sleep();
-		FlizbazArrayList<NonPlayerCharacter> Monsters = null;
-		
-		int chanceOfMonstersGroup = Die.nextInt(3);
-		int chanceOfMonstersAppearing = Die.nextInt(6);
-		
-		switch(chanceOfMonstersGroup)
-		{
-		case 0 : Monsters = characters.monsters1;
-			break;
-		case 1 : Monsters = characters.monsters2;
-			break;
-		case 2 : Monsters = characters.monsters3;
-			break;
-		}
-		
-		if(chanceOfMonstersAppearing == 5)
-		{
-			NonPlayerCharacter npc = new NonPlayerCharacter(Monsters);
-		}
-		else
-		{
-			pc.currentHP += 1;
-		}
-	}
-	public static void move(char d2){
-		d2=Character.toUpperCase(d2);
-		if(d2=='N'){
-			x-=1;
-			d='S';
-		} else if(d2=='S'){
-			x+=1;
-			d='N';
-		} else if(d2=='E'){
-			y+=1;
-			d='W';
-		} else if(d2=='W'){
-			y-=1;
-			d='E';
-		} else{
-			
-		}
-	}
-	public static void run(){
-		//call the hit, capeesh?
-		map[x][y].setmonsters(Monsters);
-		move(d);
-		
-	}
-	public static int search(int wisdom){
-		int cash=Die.nextInt(20)+1;
-		map[x][y].setLooted(true);
-		if (wisdom<cash){
-			cash=0;
-		}
-		return cash;
 	}
 }
