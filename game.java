@@ -49,6 +49,33 @@ public class game {
 					//move(e);
 				}
 			}
+			if(!turnused&&map[x][y].isWest()){
+				System.out.print("would you like to Exit? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					//move(w);
+				}
+			}
+			if(!turnused&&map[x][y].isNorth()){
+				System.out.print("would you like to Exit? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					//move(n);
+				}
+			}
+			if(!turnused&&map[x][y].isSouth()){
+				System.out.print("would you like to Exit? y/n");
+				yn=in.next();
+				yn=yn.toLowerCase();
+				if(yn=="y"||yn=="yes"){
+					turnused=true;
+					//move(s);
+				}
+			}
 			
 		}while(!quit);
 		System.out.println("thank you for playing!");

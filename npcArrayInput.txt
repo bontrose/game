@@ -9,7 +9,7 @@ Int	Dex	Str
 0	2	1	Asp
 0	2	2	Cheetah
 1	0	0	Wizard
-1	0	1	Giant Slug
+1	0	1	Giant-Slug
 1	0	2	Ox
 1	1	0	Drowsy-Goblin
 1	1	1	Goblin
