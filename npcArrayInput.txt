@@ -1,4 +1,3 @@
-Int	Dex	Str
 0	0	0	Rabbit
 0	0	1	Pig
 0	0	2	Troll
