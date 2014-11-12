@@ -9,105 +9,118 @@ public class NonPlayerCharacter extends characters
 	private int numOfNPCs;
 	private String monsterName;
 	private String attackType;
-	private String monsterNames[][][];
+	private String monsterNames[][][] = new String[3][3][3];
 	Random dice = new Random();
 	
-	NonPlayerCharacter(FlizbazArrayList<NonPlayerCharacter> monsterGroup){
+	NonPlayerCharacter(FlizbazArrayList<NonPlayerCharacter> monsterGroup)
+	{
+		setNumOfNPCs();
+		
+		for(int i = 0; i < numOfNPCs; i++)
+		{
+		
+			File file = new File("npcArrayInput.txt");
 			
-		File file = new File("npcArrayInput.txt");
-		
-		try 
-		{
-            Scanner scanner = new Scanner(file);
-            scanner.useDelimiter(" ");
-            while (scanner.hasNextLine()) 
-            {
-        		String index1 = null;
-        		String index2 = null;
-        		String index3 = null;
-            	String input = scanner.next();
-                StringTokenizer tokens = new StringTokenizer(input);
-                index1 = tokens.nextToken();
-                index2 = tokens.nextToken();
-                index3 = tokens.nextToken();
-                monsterNames[Integer.parseInt(index1)][Integer.parseInt(index2)][Integer.parseInt(index3)] = tokens.nextToken();
-            }
-            scanner.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			System.out.println("The file was not found.");
+			try 
+			{
+	            Scanner scanner = new Scanner(file);
+	            scanner.useDelimiter("\t");
+	            while (scanner.hasNextLine()) 
+	            {
+	        		String index1 = null;
+	        		String index2 = null;
+	        		String index3 = null;
+	            	String input = scanner.nextLine();
+	                StringTokenizer tokens = new StringTokenizer(input);
+	                index1 = tokens.nextToken();
+	                index2 = tokens.nextToken();
+	                index3 = tokens.nextToken();
+	                monsterName = tokens.nextToken();
+	                monsterNames[Integer.parseInt(index1)][Integer.parseInt(index2)][Integer.parseInt(index3)] = monsterName;
+	            }
+	            scanner.close();
+			} 
+			catch (FileNotFoundException e) 
+			{
+				System.out.println("The file was not found.");
+			}
+			
+			strength = statRolls();
+			intelligence = statRolls();
+			dexterity = statRolls();
+			maxHP = statRolls();
+			currentHP = maxHP;
+			
+			int in, dex, str;
+			
+			if(intelligence<8)
+			{
+				in = 0;
+			}
+			else if(intelligence>12)
+			{
+				in = 2;
+			}
+			else
+			{
+				in = 1;
+			}
+			
+			if(dexterity<8)
+			{
+				dex = 0;
+			}
+			else if(dexterity>12)
+			{
+				dex = 2;
+			}
+			else
+			{
+				dex = 1;
+			}
+			
+			if(strength<8)
+			{
+				str = 0;
+			}
+			else if(strength>12)
+			{
+				str = 2;
+			}
+			else
+			{
+				str = 1;
+			}
+			
+			monsterName = monsterNames[in][dex][str];
+			System.out.println(monsterName);
+			
+			int chanceOfHavingWeapon = random.nextInt(3);
+			if(chanceOfHavingWeapon == 2)
+			{
+				hasWeapon = true;
+			}
+			else
+			{
+				hasWeapon = false;
+			}
+			
+			int chanceOfHavingArmor = random.nextInt(3);
+			if(chanceOfHavingArmor == 2)
+			{
+				hasArmor = true;
+			}
+			else
+			{
+				hasArmor = false;
+			}
+			
+			addMonsterToGroup(monsterGroup);
 		}
-		
-		strength = statRolls();
-		intelligence = statRolls();
-		dexterity = statRolls();
-		maxHP = statRolls();
-		currentHP = maxHP;
-		
-		int in, dex, str;
-		
-		if(intelligence<8)
-		{
-			in = 0;
-		}
-		else if(intelligence>12)
-		{
-			in = 2;
-		}
-		else
-		{
-			in = 1;
-		}
-		
-		if(dexterity<8)
-		{
-			dex = 0;
-		}
-		else if(dexterity>12)
-		{
-			dex = 2;
-		}
-		else
-		{
-			dex = 1;
-		}
-		
-		if(strength<8)
-		{
-			str = 0;
-		}
-		else if(strength>12)
-		{
-			str = 2;
-		}
-		else
-		{
-			str = 1;
-		}
-		
-		monsterName = monsterNames[in][dex][str];
-		
-		int chanceOfHavingWeapon = random.nextInt(3);
-		if(chanceOfHavingWeapon == 2)
-		{
-			hasWeapon = true;
-		}
-		else
-		{
-			hasWeapon = false;
-		}
-		
-		int chanceOfHavingArmor = random.nextInt(3);
-		if(chanceOfHavingArmor == 2)
-		{
-			hasArmor = true;
-		}
-		else
-		{
-			hasArmor = false;
-		}
-		
+	}
+	
+	public void addMonsterToGroup(FlizbazArrayList<NonPlayerCharacter> monsterGroup)
+	{
 		monsterGroup.add(this);
 	}
 	
@@ -116,20 +129,37 @@ public class NonPlayerCharacter extends characters
 		int numOfRolls = 0;
 		int statTotal = 0;
 		
-		numOfRolls = dice.nextInt(6);
+		numOfRolls = dice.nextInt(7);
+		
+		if(numOfRolls == 0)
+		{
+			numOfRolls = 1;
+		}
 		
 		for(int i = 1; i <= numOfRolls; i++)
 		{
-			statTotal += dice.nextInt(3);
+			statTotal += dice.nextInt(4);
 			System.out.println("Roll " + i + " total: " + statTotal);
 		}
 	
-		return statTotal;
+		if(statTotal > 0)
+		{
+			return statTotal;
+		}
+		else 
+		{
+			return 1;
+		}
 	}
 	
 	public void setNumOfNPCs()
 	{
 		numOfNPCs = random.nextInt(7);
+		
+		if(numOfNPCs == 0)
+		{
+			numOfNPCs = 1;
+		}
 	}
 
 	public int getNumOfNPCs()
