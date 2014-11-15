@@ -9,6 +9,7 @@ public class NonPlayerCharacter extends characters
 	private int numOfNPCs;
 	private String monsterName;
 	private String attackType;
+	private String nameModifier;
 	private String monsterNames[][][] = new String[3][3][3];
 	Random dice = new Random();
 	
@@ -50,6 +51,19 @@ public class NonPlayerCharacter extends characters
 			dexterity = statRolls();
 			maxHP = statRolls();
 			currentHP = maxHP;
+			
+			if(maxHP < 5)
+			{
+				nameModifier = " Sick";
+			}
+			else if(maxHP > 12)
+			{
+				nameModifier = " Tenacious";
+			}
+			else
+			{
+				nameModifier = "";
+			}
 			
 			int in, dex, str;
 			
@@ -93,7 +107,7 @@ public class NonPlayerCharacter extends characters
 			}
 			
 			monsterName = monsterNames[in][dex][str];
-			System.out.println(monsterName);
+			monsterName = nameModifier + " " + monsterName;
 			
 			int chanceOfHavingWeapon = random.nextInt(3);
 			if(chanceOfHavingWeapon == 2)
@@ -116,6 +130,7 @@ public class NonPlayerCharacter extends characters
 			}
 			
 			addMonsterToGroup(monsterGroup);
+			System.out.println("A" + monsterName + " has appeared.");
 		}
 	}
 	
