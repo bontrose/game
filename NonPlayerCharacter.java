@@ -15,37 +15,36 @@ public class NonPlayerCharacter extends characters
 	
 	NonPlayerCharacter(FlizbazArrayList<NonPlayerCharacter> monsterGroup)
 	{
+		File file = new File("npcArrayInput.txt");
+		
+		try 
+		{
+            Scanner scanner = new Scanner(file);
+            scanner.useDelimiter("\t");
+            while (scanner.hasNextLine()) 
+            {
+        		String index1 = null;
+        		String index2 = null;
+        		String index3 = null;
+            	String input = scanner.nextLine();
+                StringTokenizer tokens = new StringTokenizer(input);
+                index1 = tokens.nextToken();
+                index2 = tokens.nextToken();
+                index3 = tokens.nextToken();
+                monsterName = tokens.nextToken();
+                monsterNames[Integer.parseInt(index1)][Integer.parseInt(index2)][Integer.parseInt(index3)] = monsterName;
+            }
+            scanner.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.out.println("The file was not found.");
+		}
+		
 		setNumOfNPCs();
 		
 		for(int i = 0; i < numOfNPCs; i++)
-		{
-		
-			File file = new File("npcArrayInput.txt");
-			
-			try 
-			{
-	            Scanner scanner = new Scanner(file);
-	            scanner.useDelimiter("\t");
-	            while (scanner.hasNextLine()) 
-	            {
-	        		String index1 = null;
-	        		String index2 = null;
-	        		String index3 = null;
-	            	String input = scanner.nextLine();
-	                StringTokenizer tokens = new StringTokenizer(input);
-	                index1 = tokens.nextToken();
-	                index2 = tokens.nextToken();
-	                index3 = tokens.nextToken();
-	                monsterName = tokens.nextToken();
-	                monsterNames[Integer.parseInt(index1)][Integer.parseInt(index2)][Integer.parseInt(index3)] = monsterName;
-	            }
-	            scanner.close();
-			} 
-			catch (FileNotFoundException e) 
-			{
-				System.out.println("The file was not found.");
-			}
-			
+		{			
 			strength = statRolls();
 			intelligence = statRolls();
 			dexterity = statRolls();
