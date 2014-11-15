@@ -144,37 +144,20 @@ public class NonPlayerCharacter extends characters
 		int numOfRolls = 0;
 		int statTotal = 0;
 		
-		numOfRolls = dice.nextInt(7);
-		
-		if(numOfRolls == 0)
-		{
-			numOfRolls = 1;
-		}
+		numOfRolls = dice.nextInt(6) + 1;
 		
 		for(int i = 1; i <= numOfRolls; i++)
 		{
-			statTotal += dice.nextInt(4);
+			statTotal += dice.nextInt(3) + 1;
 			System.out.println("Roll " + i + " total: " + statTotal);
 		}
 	
-		if(statTotal > 0)
-		{
-			return statTotal;
-		}
-		else 
-		{
-			return 1;
-		}
+		return statTotal;
 	}
 	
 	public void setNumOfNPCs()
 	{
-		numOfNPCs = random.nextInt(7);
-		
-		if(numOfNPCs == 0)
-		{
-			numOfNPCs = 1;
-		}
+		numOfNPCs = random.nextInt(6) + 1;
 	}
 
 	public int getNumOfNPCs()
