@@ -6,7 +6,7 @@ public class PlayerCharacter extends characters {
 	
 	Random dice = new Random(); 
 	private boolean hasPotion;
-	private String characterName = "";
+	private boolean hasSlept;
 	
 	PlayerCharacter(int characterClass, String characterName){
 		strength = statRolls();
@@ -17,6 +17,7 @@ public class PlayerCharacter extends characters {
 		hasWeapon = false;
 		hasArmor = false;
 		hasPotion = false;
+		hasSlept = false;
 		
 		if(characterClass == 0){//Fighter
 			strength++;
@@ -34,7 +35,7 @@ public class PlayerCharacter extends characters {
 			strength--;
 		}
 		
-		this.characterName = characterName;
+		super.setName(characterName);
 		
 		party.add(this);
 	}
@@ -72,9 +73,6 @@ public class PlayerCharacter extends characters {
 	public boolean getHasPotion(){
 		return hasPotion;
 	}
-	public String getName(){
-		return characterName;
-	}
 	
 	public void setHasPotion(boolean potion){
 		this.hasPotion = potion;
@@ -82,8 +80,19 @@ public class PlayerCharacter extends characters {
 
 	public void destruct() {
 		
-		System.out.println("Oh no, " + characterName + " has died!");
+		System.out.println("Oh no, " + super.getName() + " has died!");
 		party.remove(this);
 	}
 
+	public void setHasSlept(boolean slept) {
+		hasSlept = slept;
+	}
+
+	public boolean isPlayer(){
+		return true;
+	}
+	
+	public boolean isMonster(){
+		return false;
+	}
 }

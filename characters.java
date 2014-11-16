@@ -9,6 +9,7 @@ public abstract class characters
 	protected int maxHP;
 	protected boolean hasWeapon;
 	protected boolean hasArmor;
+	protected String name;
 	
 	public static FlizbazArrayList<PlayerCharacter> party = new FlizbazArrayList<PlayerCharacter>();
 	public static FlizbazArrayList<NonPlayerCharacter> monsters1 = new FlizbazArrayList<NonPlayerCharacter>();
@@ -138,13 +139,18 @@ public abstract class characters
 		}
 	}
 	
-	public abstract void destruct();
-	
-	//If currentHP < 0, remove from arraylist
-	
 	public void addItemToStack(Item item)
 	{
 		itemStack.push(item); // pushes dead player's item on stack
 	}
+	public void setName(String name){
+		this.name = name;
+	}
+	public String getName(){
+		return name;
+	}
+
+	public abstract boolean isPlayer();
+	public abstract boolean isMonster();
 
 }

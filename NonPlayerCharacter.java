@@ -41,97 +41,91 @@ public class NonPlayerCharacter extends characters
 			System.out.println("The file was not found.");
 		}
 		
-		setNumOfNPCs();
 		
-		for(int i = 0; i < numOfNPCs; i++)
-		{			
-			strength = statRolls();
-			intelligence = statRolls();
-			dexterity = statRolls();
-			maxHP = statRolls();
-			currentHP = maxHP;
-			
-			if(maxHP < 5)
-			{
-				nameModifier = " Sick";
-			}
-			else if(maxHP > 12)
-			{
-				nameModifier = " Tenacious";
-			}
-			else
-			{
-				nameModifier = "";
-			}
-			
-			int in, dex, str;
-			
-			if(intelligence<8)
-			{
-				in = 0;
-			}
-			else if(intelligence>12)
-			{
-				in = 2;
-			}
-			else
-			{
-				in = 1;
-			}
-			
-			if(dexterity<8)
-			{
-				dex = 0;
-			}
-			else if(dexterity>12)
-			{
-				dex = 2;
-			}
-			else
-			{
-				dex = 1;
-			}
-			
-			if(strength<8)
-			{
-				str = 0;
-			}
-			else if(strength>12)
-			{
-				str = 2;
-			}
-			else
-			{
-				str = 1;
-			}
-			
-			monsterName = monsterNames[in][dex][str];
-			monsterName = nameModifier + " " + monsterName;
-			
-			int chanceOfHavingWeapon = random.nextInt(3);
-			if(chanceOfHavingWeapon == 2)
-			{
-				hasWeapon = true;
-			}
-			else
-			{
-				hasWeapon = false;
-			}
-			
-			int chanceOfHavingArmor = random.nextInt(3);
-			if(chanceOfHavingArmor == 2)
-			{
-				hasArmor = true;
-			}
-			else
-			{
-				hasArmor = false;
-			}
-			
-			addMonsterToGroup(monsterGroup);
-			System.out.println("A" + monsterName + " has appeared.");
+		strength = statRolls();
+		intelligence = statRolls();
+		dexterity = statRolls();
+		maxHP = statRolls();
+		currentHP = maxHP;
+		
+		if(maxHP < 5)
+		{
+			nameModifier = " Sick";
 		}
+		else if(maxHP > 12)
+		{
+			nameModifier = " Tenacious";
+		}
+		else
+		{
+			nameModifier = "";
+		}
+		
+		int in, dex, str;
+		
+		if(intelligence<8)
+		{
+			in = 0;
+		}
+		else if(intelligence>12)
+		{
+			in = 2;
+		}
+		else
+		{
+			in = 1;
+		}
+		
+		if(dexterity<8)
+		{
+			dex = 0;
+		}
+		else if(dexterity>12)
+		{
+			dex = 2;
+		}
+		else
+		{
+			dex = 1;
+		}
+		
+		if(strength<8)
+		{
+			str = 0;
+		}
+		else if(strength>12)
+		{
+			str = 2;
+		}
+		else
+		{
+			str = 1;
+		}
+		
+		monsterName = monsterNames[in][dex][str];
+		super.setName(nameModifier + " " + monsterName);
+		
+		int chanceOfHavingWeapon = random.nextInt(3);
+		if(chanceOfHavingWeapon == 2){
+			hasWeapon = true;
+		}
+		else{
+			hasWeapon = false;
+		}
+		
+		int chanceOfHavingArmor = random.nextInt(3);
+		if(chanceOfHavingArmor == 2){
+			hasArmor = true;
+		}
+		else{
+			hasArmor = false;
+		}
+		
+		addMonsterToGroup(monsterGroup);
+//		System.out.println("A" + super.getName() + " has appeared.");
+		
 	}
+	
 	
 	public void addMonsterToGroup(FlizbazArrayList<NonPlayerCharacter> monsterGroup)
 	{
@@ -145,22 +139,19 @@ public class NonPlayerCharacter extends characters
 		
 		numOfRolls = dice.nextInt(6) + 1;
 		
-		for(int i = 1; i <= numOfRolls; i++)
-		{
+		for(int i = 1; i <= numOfRolls; i++){
 			statTotal += dice.nextInt(3) + 1;
-			System.out.println("Roll " + i + " total: " + statTotal);
+	//		System.out.println("Roll " + i + " total: " + statTotal);
 		}
 	
 		return statTotal;
 	}
 	
-	public void setNumOfNPCs()
-	{
+	public void setNumOfNPCs(){
 		numOfNPCs = random.nextInt(6) + 1;
 	}
 
-	public int getNumOfNPCs()
-	{	
+	public int getNumOfNPCs(){	
 		return numOfNPCs;
 	}
 	public String getAttackType() {
@@ -188,22 +179,17 @@ public class NonPlayerCharacter extends characters
 		return monsterName;
 	}
 
-	public void destruct() 
-	{		
-		System.out.println(monsterName + " has been defeated!");
-		
-		if(monsters1.size() > 0)
-		{
-			monsters1.remove(this);
-		}
-		else if(monsters2.size() > 0)
-		{
-			monsters2.remove(this);
-		}
-		else if(monsters3.size() > 0)
-		{
-			monsters3.remove(this);
-		}
-	}
 
+	public void destruct(FlizbazArrayList<NonPlayerCharacter> theMonstersArray) {		
+		System.out.println(super.getName() + " has been defeated!");
+		
+		theMonstersArray.remove(this);
+	}
+	public boolean isPlayer(){
+		return false;
+	}
+	
+	public boolean isMonster(){
+		return true;
+	}
 }

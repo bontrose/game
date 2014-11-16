@@ -1,23 +1,44 @@
 package group_project;
 
+import java.util.Random;
+
 public class room{
    private boolean North, South, East, West;
    private boolean Sleep, Search, Fight = false;
    private boolean Start, End = false;
    private boolean Wall = false;//kinda thought of the fact that we may need to check if this is a room or a wall
-   private FlizbazArrayList monsters;
+   private FlizbazArrayList<NonPlayerCharacter> monsters;
    
    public room(int n, int s, int e, int w){//initialize with int
       setNorth(n);
       setSouth(n);
       setEast(n);
       setWest(n);
+      monsters = new FlizbazArrayList<NonPlayerCharacter>();
+      Random dice = new Random();
+      int loopSize = dice.nextInt(7);
+      System.out.println(loopSize);
+      if(loopSize > 0){
+    	  for(int i = 0; i < loopSize || i <= 6; i++){
+        	  new NonPlayerCharacter(monsters);
+          }
+    	  Fight = true;
+      }
    }
    public room(boolean n, boolean s, boolean e, boolean w){//initialize with bool
       North=n;
       South=s;
       East=e;
       West=w;
+      monsters = new FlizbazArrayList<NonPlayerCharacter>();
+      Random dice = new Random();
+      int loopSize = dice.nextInt(7);
+      if(loopSize > 0){
+    	  for(int i = 0; i < loopSize || i <= 6; i++){
+        	  new NonPlayerCharacter(monsters);
+          }
+    	  Fight = true;
+      }
    }
    public room(){
       setWall(true);
@@ -82,11 +103,9 @@ public class room{
    }
    //set other items
    public void setLooted(boolean looked){
-      Search=looked;
+      setSearch(looked);
    }
-   public void setmonsters(FlizbazArrayList newMonster){
-      monsters = newMonster;
-   }
+
    public void sleep(){
 	   Sleep=true;
    }
@@ -100,7 +119,7 @@ public class room{
    public boolean isLooted(){
       return Search;
    }
-   public FlizbazArrayList getmonsters(){
+   public FlizbazArrayList<NonPlayerCharacter> getmonsters(){
 	   return monsters;
    }
    public boolean slept(){
@@ -124,4 +143,10 @@ public class room{
    public boolean isSouth(){
 	   return South;
    }
+   public boolean isFight(){
+	   return Fight;
+   }
+	public void setSearch(boolean search) {
+		Search = search;
+	}
 }
