@@ -19,7 +19,7 @@ public class room{
       int loopSize = dice.nextInt(7);
       System.out.println(loopSize);
       if(loopSize > 0){
-    	  for(int i = 0; i < loopSize || i <= 6; i++){
+    	  for(int i = 0; i < loopSize || i < 6; i++){
         	  new NonPlayerCharacter(monsters);
           }
     	  Fight = true;
@@ -34,7 +34,7 @@ public class room{
       Random dice = new Random();
       int loopSize = dice.nextInt(7);
       if(loopSize > 0){
-    	  for(int i = 0; i < loopSize || i <= 6; i++){
+    	  for(int i = 0; i < loopSize || i < 6; i++){
         	  new NonPlayerCharacter(monsters);
           }
     	  Fight = true;

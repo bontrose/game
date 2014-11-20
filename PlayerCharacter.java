@@ -58,11 +58,17 @@ public class PlayerCharacter extends characters {
 	}
 	public int meleeAttack(characters target, int targetID) {
 		int damage = (this.strength/3) + weapon.getModifier() - target.armor.getModifier();
+		if(damage==0){
+			damage=1;
+		}
 		target.currentHP -= damage;
 		return damage;
 	}
 	public int rangeAttack(characters target, int targetID) {
 		int damage = (this.dexterity/3) + weapon.getModifier() - target.armor.getModifier();
+		if(damage==0){
+			damage=1;
+		}
 		target.currentHP -= damage;
 		return damage;
 	}

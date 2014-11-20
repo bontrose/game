@@ -37,7 +37,7 @@ public class Gameplay {
 		//Until we can actually get the GUI up we can't test target selections feasibly
 		//Nor is it worth implementing pausing between turns
 		int turns = 0;
-		while(turns < players.size() + npcs.size() && !(npcs.isEmpty()) && !(players.isEmpty())){
+		while(!(npcs.isEmpty()) && !(players.isEmpty())){
 			
 			scan.nextLine();
 			//Monster turn
@@ -102,8 +102,28 @@ public class Gameplay {
 				
 			}
 			
-			turns++;
+			//turns++;
+			try{
 			System.out.println("\n" + initiative.peek().getName() + " is up next!");
+			}catch(IndexOutOfBoundsException e){
+				for(int highestDex = 0; highestDex < 20; highestDex++){
+					for(int i = 0; i < players.size(); i++){
+						if(players.get(i).dexterity == highestDex){
+							initiative.push(players.get(i));
+						}
+					}	
+					for(int i = 0; i < npcs.size(); i++){
+						if(npcs.get(i).dexterity == highestDex){
+							initiative.push(npcs.get(i));
+						}
+					}
+				}
+				strBd = new StringBuilder(str);
+				for(int i = 0; i < npcs.size(); i++){
+					strBd.append(npcs.get(i).getName() + " "); 
+				}
+				System.out.println("Monsters: " + strBd);
+			}
 		}
 		npcs.clear();
 		System.out.println("Fight is done");
