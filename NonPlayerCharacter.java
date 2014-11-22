@@ -50,11 +50,11 @@ public class NonPlayerCharacter extends characters
 		
 		if(maxHP < 5)
 		{
-			nameModifier = " Sick";
+			nameModifier = " Wounded";
 		}
 		else if(maxHP > 12)
 		{
-			nameModifier = " Tenacious";
+			nameModifier = " Strong";
 		}
 		else
 		{
