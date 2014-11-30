@@ -47,7 +47,12 @@ public class Gameplay {
 					Random dice = new Random();
 					int target = dice.nextInt(players.size());
 					//Attack type
-					if(initiative.peek().weapon.getIsRanged() == false){
+					if(initiative.peek().intelligence > 8){
+						int spellLevel = dice.nextInt(2);
+						System.out.println(initiative.peek().getName() + " casts magic at " + players.get(target).getName());
+						initiative.pop().castSpell(players.get(target), players.indexOf(players.get(target)), spellLevel);
+					}
+					else if(initiative.peek().weapon.getIsRanged() == false){
 						System.out.println(initiative.peek().getName() + " attacks " + players.get(target).getName());
 						initiative.pop().meleeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
@@ -55,6 +60,7 @@ public class Gameplay {
 						System.out.println(initiative.peek().getName() + " shoots at " + players.get(target).getCurrentHP());
 						initiative.pop().rangeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
+					
 					if(players.get(target).getCurrentHP() > 0){
 						System.out.println(players.get(target).getName() + " is at " + players.get(target).currentHP + "HP");
 					}
@@ -68,13 +74,23 @@ public class Gameplay {
 			else if(initiative.peek().isPlayer()){
 				boolean playerTurn = true;
 				while(playerTurn){
+					boolean playerCastingSpell = false;
+					int spellLevel = 0;
+					if(((PlayerCharacter) initiative.peek()).getCharacterClass() == 2){
+						System.out.println("What level spell 1 2 or 3?");
+						spellLevel = scan.nextInt();
+						playerCastingSpell = true;
+					}
 					System.out.println("Type in the name of the monster you want to attack");
 					String targetString = scan.next();
 					int i;
 					for(i = 0; i < npcs.size(); i++){
 						if(npcs.get(i).getName().equals(targetString)){
 							//Attack type
-							if(initiative.peek().hasWeapon()){
+							if(playerCastingSpell){
+								initiative.pop().castSpell(npcs.get(i), npcs.indexOf(npcs.get(i)), spellLevel);
+							}
+							else if(initiative.peek().hasWeapon()){
 								if(initiative.peek().weapon.getIsRanged() == false){
 									initiative.pop().meleeAttack(npcs.get(i), npcs.indexOf(npcs.get(i)));
 								}

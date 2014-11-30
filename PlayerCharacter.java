@@ -7,6 +7,7 @@ public class PlayerCharacter extends characters {
 	Random dice = new Random(); 
 	private boolean hasPotion;
 	private boolean hasSlept;
+	private int characterClass = 0;
 	
 	PlayerCharacter(int characterClass, String characterName){
 		strength = statRolls();
@@ -23,16 +24,19 @@ public class PlayerCharacter extends characters {
 			strength++;
 			intelligence--;
 			currentHP += strength/3;
+			characterClass = 0;
 		}
 		else if(characterClass == 1){//Thief
 			dexterity++;
 			intelligence++;
 			strength--;
+			characterClass = 1;
 		}
 		else if(characterClass == 2){//Wizard
 			intelligence++;
 			intelligence++;
 			strength--;
+			characterClass = 2;
 		}
 		
 		super.setName(characterName);
@@ -72,14 +76,22 @@ public class PlayerCharacter extends characters {
 		target.currentHP -= damage;
 		return damage;
 	}
-	public int castSpell() {
-		return 0;
+	@Override
+	public int castSpell(characters target, int targetID, int spellLevel) {
+		int damage = (this.intelligence/3) * spellLevel;
+		if(damage==0){
+			damage=1;
+		}
+		target.currentHP -= damage;
+		return damage;
 	}
 	
 	public boolean getHasPotion(){
 		return hasPotion;
 	}
-	
+	public int getCharacterClass(){
+		return characterClass;
+	}
 	public void setHasPotion(boolean potion){
 		this.hasPotion = potion;
 	}
@@ -101,4 +113,6 @@ public class PlayerCharacter extends characters {
 	public boolean isMonster(){
 		return false;
 	}
+
+
 }

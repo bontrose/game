@@ -125,7 +125,7 @@ public abstract class characters
 	public abstract int rangeAttack(characters target, int targetID); // must have a range weapon to use
 
 
-	public abstract int castSpell();	// must know a spell to use									
+	public abstract int castSpell(characters target, int targetID, int spellLevel);	// must know a spell to use									
 	
 	public void changeHP(int changeInHP)
 	{

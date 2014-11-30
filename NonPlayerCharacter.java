@@ -171,8 +171,13 @@ public class NonPlayerCharacter extends characters
 		target.currentHP -= damage;
 		return damage;
 	}
-	public int castSpell() {
-		return 0;
+	public int castSpell(characters target, int targetID, int spellLevel) {
+		int damage = (this.intelligence/3) * spellLevel;
+		if(damage==0){
+			damage=1;
+		}
+		target.currentHP -= damage;
+		return damage;
 	}
 	
 	public String getName(){
