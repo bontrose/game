@@ -129,14 +129,7 @@ public abstract class characters
 	
 	public void changeHP(int changeInHP)
 	{
-		if (changeInHP > 0)
-		{
-			currentHP += changeInHP; // adds health from potion
-		}
-		else
-		{
-			currentHP -= changeInHP; // takes damage
-		}
+		currentHP += changeInHP;
 	}
 	
 	public void addItemToStack(Item item)
