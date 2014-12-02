@@ -99,7 +99,26 @@ public class Gameplay {
 								}
 							}
 							else{
-								initiative.pop().meleeAttack(npcs.get(0), npcs.indexOf(npcs.get(i)));
+								if(npcs.get(i).getName() != npcs.get(0).getName())
+								{
+									System.out.println("Cannot attack " + npcs.get(i).getName() + " during a melee attack. " +
+														"Attacking nearest enemy instead: " + npcs.get(0).getName());
+									initiative.pop().meleeAttack(npcs.get(0), npcs.indexOf(npcs.get(i)));									
+								}
+								else
+								{
+									initiative.pop().meleeAttack(npcs.get(i), npcs.indexOf(npcs.get(i)));
+								}
+								if(npcs.get(0).getCurrentHP() > 0)
+								{
+									System.out.println(npcs.get(0).getName() + " is at " + npcs.get(0).currentHP + "HP");
+								}
+								else
+								{
+									npcs.get(0).destruct(npcs);
+								}
+								playerTurn = false;
+								break;
 							}
 							//Current enemy HP or dead 
 							if(npcs.get(i).getCurrentHP() > 0){
