@@ -24,19 +24,19 @@ public class PlayerCharacter extends characters {
 			strength++;
 			intelligence--;
 			currentHP += strength/3;
-			characterClass = 0;
+			this.characterClass = 0;
 		}
 		else if(characterClass == 1){//Thief
 			dexterity++;
 			intelligence++;
 			strength--;
-			characterClass = 1;
+			this.characterClass = 1;
 		}
 		else if(characterClass == 2){//Wizard
 			intelligence++;
 			intelligence++;
 			strength--;
-			characterClass = 2;
+			this.characterClass = 2;
 		}
 		
 		super.setName(characterName);

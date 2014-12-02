@@ -57,7 +57,7 @@ public class Gameplay {
 						initiative.pop().meleeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
 					else{
-						System.out.println(initiative.peek().getName() + " shoots at " + players.get(target).getCurrentHP());
+						System.out.println(initiative.peek().getName() + " shoots at " + players.get(target).getName());
 						initiative.pop().rangeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
 					
@@ -103,12 +103,8 @@ public class Gameplay {
 								{
 									System.out.println("Cannot attack " + npcs.get(i).getName() + " during a melee attack. " +
 														"Attacking nearest enemy instead: " + npcs.get(0).getName());
-									initiative.pop().meleeAttack(npcs.get(0), npcs.indexOf(npcs.get(i)));									
-								}
-								else
-								{
-									initiative.pop().meleeAttack(npcs.get(i), npcs.indexOf(npcs.get(i)));
-								}
+								}								
+								initiative.pop().meleeAttack(npcs.get(0), npcs.indexOf(npcs.get(0)));
 								if(npcs.get(0).getCurrentHP() > 0)
 								{
 									System.out.println(npcs.get(0).getName() + " is at " + npcs.get(0).currentHP + "HP");
@@ -118,14 +114,16 @@ public class Gameplay {
 									npcs.get(0).destruct(npcs);
 								}
 								playerTurn = false;
-								break;
 							}
 							//Current enemy HP or dead 
-							if(npcs.get(i).getCurrentHP() > 0){
-								System.out.println(npcs.get(i).getName() + " is at " + npcs.get(i).currentHP + "HP");
-							}
-							else{
-									npcs.get(i).destruct(npcs);
+							if(playerTurn == true)
+							{
+								if(npcs.get(i).getCurrentHP() > 0){
+									System.out.println(npcs.get(i).getName() + " is at " + npcs.get(i).currentHP + "HP");
+								}
+								else{
+										npcs.get(i).destruct(npcs);
+								}
 							}
 							playerTurn = false;
 							break;
@@ -133,8 +131,7 @@ public class Gameplay {
 						//Input error
 					}
 				}
-				
-				
+	
 			}
 			
 			//turns++;
@@ -236,9 +233,8 @@ public class Gameplay {
 		Random Die = new Random();
 		int findLoot=Die.nextInt(20)+1;
 		theMap[x][y].setLooted(true);
-		if (wisdom<findLoot){
-			cash=0;
+		if (wisdom > findLoot){
+			cash += 10;
 		}
-		cash += cash;
 	}//End Search
 }

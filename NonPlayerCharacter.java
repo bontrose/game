@@ -50,11 +50,11 @@ public class NonPlayerCharacter extends characters
 		
 		if(maxHP < 5)
 		{
-			nameModifier = " Wounded";
+			nameModifier = "Wounded-";
 		}
 		else if(maxHP > 12)
 		{
-			nameModifier = " Strong";
+			nameModifier = "Strong-";
 		}
 		else
 		{
@@ -102,8 +102,8 @@ public class NonPlayerCharacter extends characters
 			str = 1;
 		}
 		
-		monsterName = monsterNames[in][dex][str];
-		super.setName(nameModifier + " " + monsterName);
+		monsterName = nameModifier + monsterNames[in][dex][str];
+		super.setName(monsterName);
 		
 		int chanceOfHavingWeapon = random.nextInt(3);
 		if(chanceOfHavingWeapon == 2){

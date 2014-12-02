@@ -1,5 +1,7 @@
 package group_project;
 
+import java.util.Random;
+
 public class Item {
 	private String itemName;
 	private boolean isArmor;
@@ -17,6 +19,13 @@ public class Item {
 		this.durability = durability;
 		maxDurability = durability;
 		this.modifier = modifier;
+		
+		Random rand = new Random();
+		int chance = rand.nextInt(2);
+		if(chance == 1)
+		{
+			this.isRanged = true;
+		}
 		
 		if(isArmor == true && isWeapon == true){	//Can't be both, primarily for us to catch our own errors
 			throw new IllegalArgumentException();
