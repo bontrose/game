@@ -237,4 +237,17 @@ public class Gameplay {
 			cash += 10;
 		}
 	}//End Search
+	
+	public static int hide(int characterIndex, int numOfPlayers)
+	{
+		int newTarget = 0;		
+		Random rand = new Random();		
+		do
+		{
+			newTarget = rand.nextInt(numOfPlayers);
+		}
+		while(newTarget == characterIndex);
+		
+		return newTarget; //index of player that will be targeted
+	}//End Hide
 }
