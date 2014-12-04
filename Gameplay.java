@@ -43,6 +43,12 @@ public class Gameplay {
 			//Monster turn
 			if(initiative.peek().isMonster()){
 				boolean monsterTurn = true;
+				//Monster died, can't remove from stack, bandaid
+				if(!npcs.contains((NonPlayerCharacter) (initiative.peek()))){
+					monsterTurn = false;
+					break;
+				}
+				
 				while(monsterTurn){
 					Random dice = new Random();
 					int target = dice.nextInt(players.size());
@@ -74,6 +80,12 @@ public class Gameplay {
 			else if(initiative.peek().isPlayer()){
 				boolean playerTurn = true;
 				while(playerTurn){
+					//Character died, can't remove from stack, bandaid
+					if(!players.contains((PlayerCharacter) (initiative.peek()))){
+						playerTurn = false;
+						break;
+					}
+					
 					boolean playerCastingSpell = false;
 					int spellLevel = 0;
 					if(((PlayerCharacter) initiative.peek()).getCharacterClass() == 2){
@@ -240,13 +252,15 @@ public class Gameplay {
 	
 	public static int hide(int characterIndex, int numOfPlayers)
 	{
-		int newTarget = 0;		
+		int newTarget = 0;
+		int counter = 0;
 		Random rand = new Random();		
 		do
 		{
 			newTarget = rand.nextInt(numOfPlayers);
+			counter++;
 		}
-		while(newTarget == characterIndex);
+		while(newTarget == characterIndex || counter < 100);
 		
 		return newTarget; //index of player that will be targeted
 	}//End Hide
