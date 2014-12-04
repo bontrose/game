@@ -1,8 +1,8 @@
 Weapons+armor drops
 Running
 Potion use
-Potion find
-Loot amount
+Potion find(done)
+Loot amount(done)
 Sleep
 Spell turns
 Range Chance
