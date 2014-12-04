@@ -16,6 +16,7 @@ public class game {
 	private static String yn="";
 	
 	public static void main(String[] args) {
+		new GameScreen();
 		init();
 		boolean quit=false;
 		Scanner in = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class game {
 			}
 			//Fight has to first and isEmpty second
 			if(characters.party.isEmpty()){
-				System.out.println("EVERYONE IS DEAD\n     YOU\n     LOSE");
+				GameScreen.addText("EVERYONE IS DEAD YOU LOSE");
 				quit = true;
 				break;
 			}

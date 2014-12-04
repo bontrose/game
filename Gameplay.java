@@ -33,7 +33,7 @@ public class Gameplay {
 			strBd.append(npcs.get(i).getName() + " "); 
 		}
 		
-		System.out.println("Monsters: " + strBd + "\n\nTime to fight! Press enter!");
+		GameScreen.addText("Monsters: " + strBd + "\n\nTime to fight! Press enter!");
 		//Until we can actually get the GUI up we can't test target selections feasibly
 		//Nor is it worth implementing pausing between turns
 		int turns = 0;
@@ -55,20 +55,20 @@ public class Gameplay {
 					//Attack type
 					if(initiative.peek().intelligence > 8){
 						int spellLevel = dice.nextInt(2);
-						System.out.println(initiative.peek().getName() + " casts magic at " + players.get(target).getName());
+						GameScreen.addText(initiative.peek().getName() + " casts magic at " + players.get(target).getName());
 						initiative.pop().castSpell(players.get(target), players.indexOf(players.get(target)), spellLevel);
 					}
 					else if(initiative.peek().weapon.getIsRanged() == false){
-						System.out.println(initiative.peek().getName() + " attacks " + players.get(target).getName());
+						GameScreen.addText(initiative.peek().getName() + " attacks " + players.get(target).getName());
 						initiative.pop().meleeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
 					else{
-						System.out.println(initiative.peek().getName() + " shoots at " + players.get(target).getName());
+						GameScreen.addText(initiative.peek().getName() + " shoots at " + players.get(target).getName());
 						initiative.pop().rangeAttack(players.get(target), players.indexOf(players.get(target)));
 					}
 					
 					if(players.get(target).getCurrentHP() > 0){
-						System.out.println(players.get(target).getName() + " is at " + players.get(target).currentHP + "HP");
+						GameScreen.addText(players.get(target).getName() + " is at " + players.get(target).currentHP + "HP");
 					}
 					else{
 						players.get(target).destruct();
@@ -89,11 +89,11 @@ public class Gameplay {
 					boolean playerCastingSpell = false;
 					int spellLevel = 0;
 					if(((PlayerCharacter) initiative.peek()).getCharacterClass() == 2){
-						System.out.println("What level spell 1 2 or 3?");
+						GameScreen.addText("What level spell 1 2 or 3?");
 						spellLevel = scan.nextInt();
 						playerCastingSpell = true;
 					}
-					System.out.println("Type in the name of the monster you want to attack");
+					GameScreen.addText("Type in the name of the monster you want to attack");
 					String targetString = scan.next();
 					int i;
 					for(i = 0; i < npcs.size(); i++){
@@ -113,13 +113,13 @@ public class Gameplay {
 							else{
 								if(npcs.get(i).getName() != npcs.get(0).getName())
 								{
-									System.out.println("Cannot attack " + npcs.get(i).getName() + " during a melee attack. " +
+									GameScreen.addText("Cannot attack " + npcs.get(i).getName() + " during a melee attack. " +
 														"Attacking nearest enemy instead: " + npcs.get(0).getName());
 								}								
 								initiative.pop().meleeAttack(npcs.get(0), npcs.indexOf(npcs.get(0)));
 								if(npcs.get(0).getCurrentHP() > 0)
 								{
-									System.out.println(npcs.get(0).getName() + " is at " + npcs.get(0).currentHP + "HP");
+									GameScreen.addText(npcs.get(0).getName() + " is at " + npcs.get(0).currentHP + "HP");
 								}
 								else
 								{
@@ -131,7 +131,7 @@ public class Gameplay {
 							if(playerTurn == true)
 							{
 								if(npcs.get(i).getCurrentHP() > 0){
-									System.out.println(npcs.get(i).getName() + " is at " + npcs.get(i).currentHP + "HP");
+									GameScreen.addText(npcs.get(i).getName() + " is at " + npcs.get(i).currentHP + "HP");
 								}
 								else{
 										npcs.get(i).destruct(npcs);
@@ -148,7 +148,7 @@ public class Gameplay {
 			
 			//turns++;
 			try{
-			System.out.println("\n" + initiative.peek().getName() + " is up next!");
+			GameScreen.addText("\n" + initiative.peek().getName() + " is up next!");
 			}catch(IndexOutOfBoundsException e){
 				for(int highestDex = 0; highestDex < 20; highestDex++){
 					for(int i = 0; i < players.size(); i++){
@@ -166,11 +166,11 @@ public class Gameplay {
 				for(int i = 0; i < npcs.size(); i++){
 					strBd.append(npcs.get(i).getName() + " "); 
 				}
-				System.out.println("Monsters: " + strBd);
+				GameScreen.addText("Monsters: " + strBd);
 			}
 		}
 		npcs.clear();
-		System.out.println("Fight is done");
+		GameScreen.addText("Fight is done");
 	}//End Fight
 	
 	public static void runFight(FlizbazArrayList<NonPlayerCharacter> npcs){
@@ -244,24 +244,9 @@ public class Gameplay {
 	public static void search(room theMap[][], int wisdom, int x, int y){
 		Random Die = new Random();
 		int findLoot=Die.nextInt(20)+1;
-		int cashAmount=Die.nextInt(20)+1;
-		int findPotion=Die.nextInt(5)+1;
-		int counter = 0; 
-		int characterIndex = 0; // player that gets potion
 		theMap[x][y].setLooted(true);
-		if (wisdom > findLoot)
-		{
-			cash += cashAmount;
-		}
-		if(findPotion == 5)
-		{	 
-			do 
-			{ 
-				characterIndex = Die.nextInt(characters.party.size()); 
-				counter++;
-			} 
-			while(characters.party.get(characterIndex).getHasPotion() == true || counter < 100);
-			characters.party.get(characterIndex).setHasPotion(true);
+		if (wisdom > findLoot){
+			cash += 10;
 		}
 	}//End Search
 	

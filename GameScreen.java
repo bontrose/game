@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class GameScreen extends JFrame {
@@ -25,6 +27,10 @@ public class GameScreen extends JFrame {
 	private JPanel compassPanel;
 	private JLabel startScreenBackgroundLabel;
 	private JLabel backgroundLabel;
+//	public static JLabel text1;
+//	public static JLabel text2;
+	public static JTextArea display;
+	public static JScrollPane scrollPane;
 	public JButton north;
 	public JButton south;
 	public JButton east;
@@ -92,6 +98,22 @@ public class GameScreen extends JFrame {
 		compassPanel.setBackground(Color.BLACK);
 		gamePanel.add(panelHolder, BorderLayout.SOUTH);
 	}
+	public void drawGameText() {
+		display = new JTextArea("");
+		display.setForeground(Color.WHITE);
+		display.setBackground(Color.BLACK);
+		display.setRows(30);
+		display.setColumns(50);
+		
+		scrollPane = new JScrollPane(display);
+		JPanel panelHolder = new JPanel();
+		panelHolder.setBackground(Color.BLACK);
+		panelHolder.add(scrollPane);
+		gamePanel.add(panelHolder, BorderLayout.CENTER);
+	}
+	public static void addText(String stringToAdd){
+		display.append(stringToAdd + "\n");
+	}
 	
 	public void drawStartScreen() {
 		gamePanel.add(startScreenBackgroundLabel);
@@ -101,6 +123,7 @@ public class GameScreen extends JFrame {
 		gamePanel.remove(startScreenBackgroundLabel);
 		gamePanel.setBackground(Color.BLACK);
 		drawCompass();
+		drawGameText();
 		revalidate();
 	}
 	
