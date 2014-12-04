@@ -9,6 +9,7 @@ public class Gameplay {
 
 	public static String d;
 	public static int cash=0;
+	public static FlizbazArrayList<String> items = new FlizbazArrayList<String>();
 	
 	public static void fight(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
 		//Initiative
@@ -128,7 +129,8 @@ public class Gameplay {
 								}
 								else
 								{
-									npcs.get(0).destruct(npcs);
+									items = npcs.get(0).destruct(npcs);
+									pickUpItems(initiative, npcs.size());
 								}
 								playerTurn = false;
 							}
@@ -139,7 +141,8 @@ public class Gameplay {
 									GameScreen.addText(npcs.get(i).getName() + " is at " + npcs.get(i).currentHP + "HP");
 								}
 								else{
-										npcs.get(i).destruct(npcs);
+									items = npcs.get(i).destruct(npcs);
+									pickUpItems(initiative, npcs.size());
 								}
 							}
 							playerTurn = false;
@@ -178,6 +181,29 @@ public class Gameplay {
 		GameScreen.addText("Fight is done");
 	}//End Fight
 	
+	public static void pickUpItems(Stack<characters> initiative, int size)
+	{
+		if(size > 0)
+		{
+			if(items.contains("weapon"))
+			{
+				if(initiative.peek().isPlayer())
+				{
+					initiative.peek().hasWeapon = true;
+					GameScreen.addText(initiative.peek().getName() + " picked up a weapon!");
+				}
+			}
+			if(items.contains("armor"))
+			{
+				if(initiative.peek().isPlayer())
+				{
+					initiative.peek().hasArmor = true;
+					GameScreen.addText(initiative.peek().getName() + " picked up some armor!");
+				}
+			}
+		}
+	}
+	
 	public static void run(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
 		for(int i = 0; i < npcs.size(); i++){
 			Random rnd = new Random();
@@ -203,11 +229,10 @@ public class Gameplay {
 				players.get(target).destruct();
 			}
 		}
-		
+				
 		game.map[game.x][game.y].setFight(false);
 		game.moveAsTurn(d);
-	}
-
+	}//End Run
 	
 	public static void move(room[][] theMap, char d2, int x, int y){
 		d2=Character.toUpperCase(d2);
@@ -225,7 +250,6 @@ public class Gameplay {
 			y-=1;
 			d="E";
 		}
-		
 	}//End Move
 	
 	public static void sleep()
@@ -266,9 +290,25 @@ public class Gameplay {
 	public static void search(room theMap[][], int wisdom, int x, int y){
 		Random Die = new Random();
 		int findLoot=Die.nextInt(20)+1;
+		int cashAmount=Die.nextInt(20)+1;
+		int findPotion=Die.nextInt(5)+1;
+		int counter = 0; 
+		int characterIndex = 0; // player that gets potion
 		theMap[x][y].setLooted(true);
-		if (wisdom > findLoot){
-			cash += 10;
+		if (wisdom > findLoot)
+		{
+			cash += cashAmount;
+		}
+		if(findPotion == 5)
+		{	 
+			do 
+			{ 
+				characterIndex = Die.nextInt(characters.party.size()); 
+				counter++;
+			} 
+			while(characters.party.get(characterIndex).getHasPotion() == true || counter < 100);
+			characters.party.get(characterIndex).setHasPotion(true);
+			GameScreen.addText(characters.party.get(characterIndex).getName() + " picked up a potion!");
 		}
 	}//End Search
 	

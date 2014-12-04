@@ -136,6 +136,10 @@ public abstract class characters
 	{
 		itemStack.push(item); // pushes dead player's item on stack
 	}
+	public Item popItemOffStack()
+	{
+		return itemStack.pop();
+	}
 	public void setName(String name){
 		this.name = name;
 	}

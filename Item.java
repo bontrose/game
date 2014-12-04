@@ -49,4 +49,52 @@ public class Item {
 		return isRanged;
 	}
 
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public boolean isArmor() {
+		return isArmor;
+	}
+
+	public void setArmor(boolean isArmor) {
+		this.isArmor = isArmor;
+	}
+
+	public boolean isWeapon() {
+		return isWeapon;
+	}
+
+	public void setWeapon(boolean isWeapon) {
+		this.isWeapon = isWeapon;
+	}
+
+	public int getDurability() {
+		return durability;
+	}
+
+	public void setDurability(int durability) {
+		this.durability = durability;
+	}
+
+	public int getMaxDurability() {
+		return maxDurability;
+	}
+
+	public void setMaxDurability(int maxDurability) {
+		this.maxDurability = maxDurability;
+	}
+
+	public void setRanged(boolean isRanged) {
+		this.isRanged = isRanged;
+	}
+
+	public void setModifier(int modifier) {
+		this.modifier = modifier;
+	}
+
 }
