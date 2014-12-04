@@ -244,9 +244,24 @@ public class Gameplay {
 	public static void search(room theMap[][], int wisdom, int x, int y){
 		Random Die = new Random();
 		int findLoot=Die.nextInt(20)+1;
+		int cashAmount=Die.nextInt(20)+1;
+		int findPotion=Die.nextInt(5)+1;
+		int counter = 0; 
+		int characterIndex = 0; // player that gets potion
 		theMap[x][y].setLooted(true);
-		if (wisdom > findLoot){
-			cash += 10;
+		if (wisdom > findLoot)
+		{
+			cash += cashAmount;
+		}
+		if(findPotion == 5)
+		{	 
+			do 
+			{ 
+				characterIndex = Die.nextInt(characters.party.size()); 
+				counter++;
+			} 
+			while(characters.party.get(characterIndex).getHasPotion() == true || counter < 100);
+			characters.party.get(characterIndex).setHasPotion(true);
 		}
 	}//End Search
 	
