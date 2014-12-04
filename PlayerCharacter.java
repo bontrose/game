@@ -43,7 +43,12 @@ public class PlayerCharacter extends characters {
 		
 		party.add(this);
 	}
-
+	
+	public void setName(String characterName){
+		characterName=characterName.substring(0, 10);
+		super.setName(characterName);
+	}
+	
 	public int statRolls(){
 	//	dice.ints(1, 6);
 		int statTotal = 0;

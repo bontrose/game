@@ -24,4 +24,4 @@
 2	1	2	Goblin-Chief
 2	2	0	Lightning-Elemental
 2	2	1	Skulk
-2	2	2	Rabbit-of-Caerbannog
+2	2	2	Rabbit-o-Caerbannog
