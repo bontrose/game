@@ -22,6 +22,7 @@ public class game {
 		
 		while(!(quit)){
 			if(map[x][y].isFight()){
+				map[x][y].setFight(false);
 				Gameplay.fight(characters.party, map[x][y].getmonsters());
 			}
 			//Fight has to first and isEmpty second

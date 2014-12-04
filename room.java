@@ -146,6 +146,9 @@ public class room{
    public boolean isFight(){
 	   return Fight;
    }
+   public void setFight(boolean f){
+	   Fight=f;
+   }
 	public void setSearch(boolean search) {
 		Search = search;
 	}
