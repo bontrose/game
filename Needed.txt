@@ -1,0 +1,9 @@
+Weapons+armor drops
+Running
+Potion use
+Potion find
+Loot amount
+Sleep
+Spell turns
+Range Chance
+!!!GUI!!!
