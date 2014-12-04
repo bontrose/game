@@ -131,6 +131,22 @@ public class GameScreen extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==north){
+				System.out.println("north");
+				game.moveAsTurn("north");
+				
+			}else if(e.getSource()==south){
+				System.out.println("south");
+				game.moveAsTurn("south");
+				
+			}else if(e.getSource()==east){
+				System.out.println("east");
+				game.moveAsTurn("east");
+				
+			}else if(e.getSource()==west){
+				System.out.println("west");
+				game.moveAsTurn("west");
+			}
 			
 		}
 		
@@ -175,4 +191,17 @@ public class GameScreen extends JFrame {
 			
 		}
 	}
+	
+	public void setNorth(boolean on){
+		north.setEnabled(on);
+	}
+	public void setSouth(boolean on){
+		south.setEnabled(on);
+}
+	public void setEast(boolean on){
+		east.setEnabled(on);
+}
+	public void setWest(boolean on){
+		west.setEnabled(on);
+}
 }

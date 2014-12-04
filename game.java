@@ -14,9 +14,10 @@ public class game {
 	static Random Die = new Random();
 	private static boolean turnused=false;
 	private static String yn="";
+	static GameScreen screen;
 	
 	public static void main(String[] args) {
-		new GameScreen();
+		 screen =new GameScreen();
 		init();
 		boolean quit=false;
 		Scanner in = new Scanner(System.in);
@@ -152,7 +153,10 @@ public class game {
 			} else if(direction.equals("west")){
 				y -= 1;
 			}
-			
+			screen.setNorth(map[x][y].isNorth());
+			screen.setSouth(map[x][y].isSouth());
+			screen.setEast(map[x][y].isEast());
+			screen.setWest(map[x][y].isWest());
 			System.out.println("x: " + x + " y: " + y);
 		}
 	}
