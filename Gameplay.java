@@ -7,7 +7,7 @@ import java.util.jar.Attributes.Name;
 
 public class Gameplay {
 
-	public static char d;
+	public static String d;
 	public static int cash=0;
 	
 	public static void fight(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
@@ -83,6 +83,11 @@ public class Gameplay {
 					//Character died, can't remove from stack, bandaid
 					if(!players.contains((PlayerCharacter) (initiative.peek()))){
 						playerTurn = false;
+						break;
+					}
+					GameScreen.addText("Run away? y/n");
+					if(scan.next().toLowerCase().equals("y")){
+						run(players, npcs);
 						break;
 					}
 					
@@ -173,37 +178,54 @@ public class Gameplay {
 		GameScreen.addText("Fight is done");
 	}//End Fight
 	
-	public static void runFight(FlizbazArrayList<NonPlayerCharacter> npcs){
+	public static void run(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
+		for(int i = 0; i < npcs.size(); i++){
+			Random rnd = new Random();
+			int target = rnd.nextInt(players.size());
+			if(npcs.get(i).intelligence > 8){
+				int spellLevel = rnd.nextInt(2);
+				GameScreen.addText(npcs.get(i) + " casts magic at " + players.get(target).getName());
+				npcs.get(i).castSpell(players.get(target), players.indexOf(players.get(target)), spellLevel);
+			}
+			else if(npcs.get(i).weapon.getIsRanged() == false){
+				GameScreen.addText(npcs.get(i).getName() + " attacks " + players.get(target).getName());
+				npcs.get(i).meleeAttack(players.get(target), players.indexOf(players.get(target)));
+			}
+			else{
+				GameScreen.addText(npcs.get(i).getName() + " shoots at " + players.get(target).getName());
+				npcs.get(i).rangeAttack(players.get(target), players.indexOf(players.get(target)));
+			}
+			
+			if(players.get(target).getCurrentHP() > 0){
+				GameScreen.addText(players.get(target).getName() + " is at " + players.get(target).currentHP + "HP");
+			}
+			else{
+				players.get(target).destruct();
+			}
+		}
 		
+		game.map[game.x][game.y].setFight(false);
+		game.moveAsTurn(d);
 	}
+
 	
-//	public static room run(room map){
-		//call the hit, capeesh?
-		
-		//This is temporary\\
-		//This need to reference the actual map when we start rendering it\\
-//		Map[x][y].setmonsters(characters.monsters1);
-//		return move(d, map.x, y);
-//	}//End Run
-	
-	public static room move(room[][] theMap, char d2, int x, int y){
+	public static void move(room[][] theMap, char d2, int x, int y){
 		d2=Character.toUpperCase(d2);
 
 		if(d2=='N'){
 			x-=1;
-			d='S';
+			d="S";
 		} else if(d2=='S'){
 			x+=1;
-			d='N';
+			d="N";
 		} else if(d2=='E'){
 			y+=1;
-			d='W';
+			d="W";
 		} else if(d2=='W'){
 			y-=1;
-			d='E';
+			d="E";
 		}
 		
-		return theMap[x][y];
 	}//End Move
 	
 	public static void sleep()

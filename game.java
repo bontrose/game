@@ -9,8 +9,8 @@ public class game {
 	static FlizbazArrayList<characters> Players;
 	static FlizbazArrayList<characters> Monsters;
 	static char d;
-	private static int x = 0;
-	private static int y = 0; // position
+	public static int x = 0;
+	public static int y = 0; // position
 	static Random Die = new Random();
 	private static boolean turnused=false;
 	private static String yn="";
@@ -143,7 +143,7 @@ public class game {
 		if(yn.equals("y")||yn.equals("yes")){
 			turnused=true;
 			System.out.println("You moved " +direction + ".");
-			Gameplay.move(map, 's', x, y);
+			//Gameplay.move(map, 's', x, y);
 			if(direction.equals("north")){
 				x -= 1;
 			} else if(direction.equals("south")){

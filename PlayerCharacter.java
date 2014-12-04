@@ -48,7 +48,7 @@ public class PlayerCharacter extends characters {
 		characterName=characterName.substring(0, 10);
 		super.setName(characterName);
 	}
-	
+
 	public int statRolls(){
 	//	dice.ints(1, 6);
 		int statTotal = 0;
