@@ -7,3 +7,4 @@ Sleep
 Spell turns
 Range Chance
 !!!GUI!!!
+getting the map loading in the gui
