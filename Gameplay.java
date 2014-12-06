@@ -9,7 +9,7 @@ public class Gameplay {
 
 	public static String d;
 	public static int cash=0;
-	public static FlizbazArrayList<String> items = new FlizbazArrayList<String>();
+	public static FlizbazArrayList<Item> items = new FlizbazArrayList<Item>();
 	
 	public static void fight(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
 		//Initiative
@@ -130,7 +130,7 @@ public class Gameplay {
 								else
 								{
 									items = npcs.get(0).destruct(npcs);
-									pickUpItems(initiative, npcs.size());
+									pickUpItems(initiative, items.size());
 								}
 								playerTurn = false;
 							}
@@ -142,7 +142,7 @@ public class Gameplay {
 								}
 								else{
 									items = npcs.get(i).destruct(npcs);
-									pickUpItems(initiative, npcs.size());
+									pickUpItems(initiative, items.size());
 								}
 							}
 							playerTurn = false;
@@ -183,23 +183,31 @@ public class Gameplay {
 	
 	public static void pickUpItems(Stack<characters> initiative, int size)
 	{
-		if(size > 0)
+		if(size >= 1)
 		{
-			if(items.contains("weapon"))
+			if(items.get(0).isWeapon())
 			{
 				if(initiative.peek().isPlayer())
 				{
-					initiative.peek().hasWeapon = true;
+					initiative.peek().weapon = items.get(0);
 					GameScreen.addText(initiative.peek().getName() + " picked up a weapon!");
 				}
 			}
-			if(items.contains("armor"))
+			else if(items.get(0).isArmor())
 			{
 				if(initiative.peek().isPlayer())
 				{
-					initiative.peek().hasArmor = true;
+					initiative.peek().armor = items.get(0);
 					GameScreen.addText(initiative.peek().getName() + " picked up some armor!");
 				}
+			}
+		}
+		if(size == 2)
+		{
+			if(initiative.peek().isPlayer())
+			{
+				initiative.peek().armor = items.get(1);
+				GameScreen.addText(initiative.peek().getName() + " picked up some armor!");
 			}
 		}
 	}
@@ -258,7 +266,6 @@ public class Gameplay {
 			characters.party.get(i).setHasSlept(true);
 		}
 		Random random = new Random();
-		String fileName = null;
 		FlizbazArrayList<NonPlayerCharacter> sleepMonsterEncounter = null;
 		
 		int chanceOfMonstersAppearing = random.nextInt(6);

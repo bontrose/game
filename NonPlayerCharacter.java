@@ -183,22 +183,16 @@ public class NonPlayerCharacter extends characters
 	public String getName(){
 		return monsterName;
 	}
-
-
-	public FlizbazArrayList<String> destruct(FlizbazArrayList<NonPlayerCharacter> theMonstersArray) {		
+	public FlizbazArrayList<Item> destruct(FlizbazArrayList<NonPlayerCharacter> theMonstersArray) {		
 		System.out.println(super.getName() + " has been defeated!");
-		FlizbazArrayList<String> items = new FlizbazArrayList<String>();
+		FlizbazArrayList<Item> items = new FlizbazArrayList<Item>();
 		if(this.hasWeapon)
-		{
-			Item weapon = new Item("weapon", false, true, false, 5, 0);			
-			super.addItemToStack(weapon);
-			items.add(super.popItemOffStack().getItemName());
+		{			
+			items.add(weapon);
 		}
 		if(this.hasArmor)
-		{
-			Item armor = new Item("armor", true, false, false, 5, 0);			
-			super.addItemToStack(armor);
-			items.add(super.popItemOffStack().getItemName());
+		{		
+			items.add(armor);
 		}
 		theMonstersArray.remove(this);
 		return items;
