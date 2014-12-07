@@ -215,11 +215,21 @@ public class game {
 				GameScreen.addText("You have a wall on one side, the others are shrouded in darkness");
 			}
 		}
-		screen.setNorth(map[x][y].isNorth());
-		screen.setSouth(map[x][y].isSouth());
-		screen.setEast(map[x][y].isEast());
-		screen.setWest(map[x][y].isWest());
+		compass_setter(true);
 		System.out.println("x: " + x + " y: " + y);
+	}
+	public static void compass_setter(boolean on){
+		if(on){
+			screen.setNorth(map[x][y].isNorth());
+			screen.setSouth(map[x][y].isSouth());
+			screen.setEast(map[x][y].isEast());
+			screen.setWest(map[x][y].isWest());
+		}else{
+			screen.setNorth(false);
+			screen.setSouth(false);
+			screen.setEast(false);
+			screen.setWest(false);
+		}
 	}
 	
 }

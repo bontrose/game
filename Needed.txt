@@ -5,6 +5,7 @@ buttons
   fight choices(yes/no)
   press enter - currently command line
   Fight - Search - Run - Sleep
+Rooms should have description
 item wear(i honestly don't know if this has been done)
 spell cooldown
 potion use
@@ -18,17 +19,14 @@ cast spell
 gamescreen textbox
   player editable
   needs auto scroll
-  needs text for loading room/ making players(may do windows file choice for loading mazes)
+  needs text for loading room/ makinvg players(may do windows file choice for loading mazes)
 starting room
   does not always work
 movement
-  works, need to disable:
-    in battle
-    before the maze is loaded
+  works, need to disable before the maze is loaded
 fight
   some things need to be ported to buttons
-  fist pc of every round, name is not shown, does not seem to happen for npcs
-  name can still show on fight(i defeted the last guy left in a 2 on 1 and it showed his name before declaring the fight over
+  does not start back up if you enter a new room via gui
 looting
   still uses 10 intel
   
@@ -56,4 +54,3 @@ classes
 names
 maze end
 1-6 players
-room description

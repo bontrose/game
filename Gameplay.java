@@ -14,6 +14,7 @@ public class Gameplay {
 	
 	public static void fight(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
 		//Initiative
+		game.compass_setter(false);
 		Stack<characters> initiative = new Stack<characters>();
 		for(int highestDex = 0; highestDex < 20; highestDex++){
 			for(int i = 0; i < players.size(); i++){
@@ -186,6 +187,7 @@ public class Gameplay {
 		}
 		npcs.clear();
 		GameScreen.addText("Fight is done");
+		game.compass_setter(true);
 	}//End Fight
 	
 	public static void pickUpItems(Stack<characters> initiative, int size)
