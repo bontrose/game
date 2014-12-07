@@ -140,17 +140,80 @@ public class game {
 	}
 	
 	public static void moveAsTurn(String direction){
-		turnused=true;
-		GameScreen.addText("You moved " +direction + ".");
-		//Gameplay.move(map, 's', x, y);
-		if(direction.equals("north")){
-			x -= 1;
-		} else if(direction.equals("south")){
-			x += 1;
-		} else if(direction.equals("east")){
-			y += 1;
-		} else if(direction.equals("west")){
-			y -= 1;
+		boolean moveable=false;
+		//stops movement text when no movement is done
+		if(direction.equals("north")&&map[x][y].isNorth()){
+			moveable=true;
+		} else if(direction.equals("south")&&map[x][y].isSouth()){
+			moveable=true;
+		} else if(direction.equals("east")&&map[x][y].isEast()){
+			moveable=true;
+		} else if(direction.equals("west")&&map[x][y].isWest()){
+			moveable=true;
+		}
+		if(moveable){
+			turnused=true;
+			GameScreen.addText("You moved " +direction + ".");
+			//Gameplay.move(map, 's', x, y);
+			if(direction.equals("north")){
+				x -= 1;
+			} else if(direction.equals("south")){
+				x += 1;
+			} else if(direction.equals("east")){
+				y += 1;
+			} else if(direction.equals("west")){
+				y -= 1;
+			}
+			//I apologize
+			if
+			(	
+				//hallway
+				(
+					//north south
+					(map[x][y].isSouth()&&map[x][y].isNorth()) && !(map[x][y].isEast()||map[x][y].isWest())
+				)||(
+					//east west
+					(map[x][y].isEast()&&map[x][y].isWest()) && !(map[x][y].isSouth()||map[x][y].isNorth())
+				)
+			)
+			{
+				GameScreen.addText("You are in a hallway");
+			}else if
+			(
+				//death chamber
+				!(map[x][y].isSouth()||map[x][y].isNorth()||map[x][y].isEast()||map[x][y].isWest())
+			)
+			{
+				GameScreen.addText("You are ... in a small room with no exit");
+			}else if
+			(
+				//all four exits
+				map[x][y].isSouth()&&map[x][y].isNorth()&&map[x][y].isEast()&&map[x][y].isWest()
+			)
+			{
+				GameScreen.addText("You are in a large room of which you cannot see the sides in the dark");
+			}else if
+			(
+				//dead end
+				(
+					//north exit
+					map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
+				)||(
+					//south exit
+					!map[x][y].isNorth()&&map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
+				)||(
+					//east exit
+					!map[x][y].isNorth()&&!map[x][y].isSouth()&&map[x][y].isEast()&&!map[x][y].isWest()
+				)||(
+					//west exit
+					!map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&map[x][y].isWest()
+				)
+			)
+			{
+				GameScreen.addText("You have hit a dead end, the only exit is from whence you came");
+			}else{
+				GameScreen.addText("You have a wall on one side, the others are shrouded in darkness");
+			}
 		}
 		screen.setNorth(map[x][y].isNorth());
 		screen.setSouth(map[x][y].isSouth());
