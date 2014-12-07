@@ -34,14 +34,14 @@ public class game {
 				break;
 			}
 			if(!turnused&&!map[x][y].isLooted()){
-				System.out.print("would you like to loot? y/n");
+				GameScreen.addText("would you like to loot? y/n");
 				yn=in.next();
 				yn=yn.toLowerCase();
 				if(yn.equals("y")||yn.equals("yes")){
 					turnused=true;
 					Gameplay.search(map, 10, x, y);
 					map[x][y].setSearch(true);
-					System.out.println("Your cash is now " + Gameplay.cash);
+					GameScreen.addText("Your cash is now " + Gameplay.cash);
 				}
 			}
 			if(!turnused&&map[x][y].isExit()){
@@ -79,7 +79,7 @@ public class game {
 			}
 			turnused = false;
 		}
-		System.out.println("thank you for playing!");
+		GameScreen.addText("thank you for playing!");
 		in.close();
 	}
 	public static void init(){//makes players, rooms, finds what room to start in
@@ -97,12 +97,12 @@ public class game {
 				map=load.newMap(name);
 				mapped=true;
 			} catch (IOException e) {
-				System.out.println("bad file name");
+				GameScreen.addText("bad file name");
 			}
 		}while(!mapped);
 		
 		do{
-			System.out.print("number of players?(1-6): ");
+			GameScreen.addText("number of players?(1-6): ");
 			try{
 			PCnum=in.nextInt();
 			}catch(InputMismatchException e){
@@ -113,13 +113,13 @@ public class game {
 		PlayerCharacter playa;
 		Players= new FlizbazArrayList<characters>(PCnum);
 		for(int x2=0; x2<PCnum; x2++){
-			System.out.print("player "+(x2+1)+" name: ");
+			GameScreen.addText("player "+(x2+1)+" name: ");
 			name=in.next();
-			System.out.println("0:Fighter");
-			System.out.println("1:Thief");
-			System.out.println("2:Wizard");
+			GameScreen.addText("0:Fighter");
+			GameScreen.addText("1:Thief");
+			GameScreen.addText("2:Wizard");
 			do{
-				System.out.print("class number): ");
+				GameScreen.addText("class number): ");
 				try{
 				claz=in.nextInt();
 				}catch(InputMismatchException e){
@@ -140,25 +140,23 @@ public class game {
 	}
 	
 	public static void moveAsTurn(String direction){
-		if(yn.equals("y")||yn.equals("yes")){
-			turnused=true;
-			System.out.println("You moved " +direction + ".");
-			//Gameplay.move(map, 's', x, y);
-			if(direction.equals("north")){
-				x -= 1;
-			} else if(direction.equals("south")){
-				x += 1;
-			} else if(direction.equals("east")){
-				y += 1;
-			} else if(direction.equals("west")){
-				y -= 1;
-			}
-			screen.setNorth(map[x][y].isNorth());
-			screen.setSouth(map[x][y].isSouth());
-			screen.setEast(map[x][y].isEast());
-			screen.setWest(map[x][y].isWest());
-			System.out.println("x: " + x + " y: " + y);
+		turnused=true;
+		GameScreen.addText("You moved " +direction + ".");
+		//Gameplay.move(map, 's', x, y);
+		if(direction.equals("north")){
+			x -= 1;
+		} else if(direction.equals("south")){
+			x += 1;
+		} else if(direction.equals("east")){
+			y += 1;
+		} else if(direction.equals("west")){
+			y -= 1;
 		}
+		screen.setNorth(map[x][y].isNorth());
+		screen.setSouth(map[x][y].isSouth());
+		screen.setEast(map[x][y].isEast());
+		screen.setWest(map[x][y].isWest());
+		System.out.println("x: " + x + " y: " + y);
 	}
 	
 }

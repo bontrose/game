@@ -1,6 +1,7 @@
 package group_project;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.jar.Attributes.Name;
@@ -95,9 +96,15 @@ public class Gameplay {
 					boolean playerCastingSpell = false;
 					int spellLevel = 0;
 					if(((PlayerCharacter) initiative.peek()).getCharacterClass() == 2){
-						GameScreen.addText("What level spell 1 2 or 3?");
-						spellLevel = scan.nextInt();
-						playerCastingSpell = true;
+						do{
+							try{
+								GameScreen.addText("What level spell 1 2 or 3?");
+								spellLevel = scan.nextInt();
+								playerCastingSpell = true;
+							}catch(InputMismatchException e){
+								scan = new Scanner(System.in);
+							}
+						}while(!playerCastingSpell);
 					}
 					GameScreen.addText("Type in the name of the monster you want to attack");
 					String targetString = scan.next();

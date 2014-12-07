@@ -19,13 +19,17 @@ cast spell
 gamescreen textbox
   player editable
   needs auto scroll
+  needs text for loading room/ makinvg players(may do windows file choice for loading mazes)
 starting room
   does not always work
 movement
-  not sure if actually working
+  works, need to disable:
+    in battle
+    before the maze is loaded
 fight
-  death notice in command line
-  spell lv breaks on non ints, try string
+  some things need to be ported to buttons
+looting
+  still uses 10 intel
   
 
 --skipping--
@@ -40,7 +44,6 @@ inititive
 queue(leave the band aid in place)
 room
 maze
-looting
 armor drops
 potion drops(right?)
 npc items

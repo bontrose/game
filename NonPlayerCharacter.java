@@ -184,7 +184,7 @@ public class NonPlayerCharacter extends characters
 		return monsterName;
 	}
 	public FlizbazArrayList<Item> destruct(FlizbazArrayList<NonPlayerCharacter> theMonstersArray) {		
-		System.out.println(super.getName() + " has been defeated!");
+		GameScreen.addText(super.getName() + " has been defeated!");
 		FlizbazArrayList<Item> items = new FlizbazArrayList<Item>();
 		if(this.hasWeapon)
 		{			
