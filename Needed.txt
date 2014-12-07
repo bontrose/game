@@ -1,10 +1,54 @@
-Weapons+armor drops
-Running
-Potion use
-Potion find(done)
-Loot amount(done)
+--needs to be done--
 Sleep
-Spell turns
-Range Chance
-!!!GUI!!!
-getting the map loading in the gui
+hide
+buttons
+  fight choices(yes/no)
+  press enter - currently command line
+  Fight - Search - Run - Sleep
+Rooms should have description
+item wear(i honestly don't know if this has been done)
+spell cooldown
+potion use
+hit/miss"1D20 > targets Dexterity - if target is doing a range attack, roll 1D15"
+
+--needs work--
+Run
+  can't run
+cast spell
+  cooldown
+gamescreen textbox
+  player editable
+  needs auto scroll
+starting room
+  does not always work
+movement
+  not sure if actually working
+fight
+  death notice in command line
+  spell lv breaks on non ints, try string
+  
+
+--skipping--
+memorize spell
+
+--done--
+Search
+cast spell
+melee attack
+range attack(right?)
+inititive
+queue(leave the band aid in place)
+room
+maze
+looting
+armor drops
+potion drops(right?)
+npc items
+stats
+stat bonuses
+armor(right?)
+weapons(right?)
+classes
+names
+maze end
+1-6 players
