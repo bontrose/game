@@ -82,6 +82,10 @@ public class GameScreen extends JFrame {
 		south = new JButton("S");
 		east = new JButton("E");
 		west = new JButton("W");
+		north.setEnabled(false);
+		south.setEnabled(false);
+		east.setEnabled(false);
+		west.setEnabled(false);
 		
 		north.addActionListener(new compassListener());
 		south.addActionListener(new compassListener());

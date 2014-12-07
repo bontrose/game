@@ -134,9 +134,13 @@ public class game {
 				if(map[x][y].isEntrance()){
 					x=x2;
 					y=y2;
+					map[x][y].setFight(false);
+					map[x][y].setLooted(true);
 				}
 			}
 		}
+		compass_setter(true);
+		room_text();
 	}
 	
 	public static void moveAsTurn(String direction){
@@ -164,59 +168,65 @@ public class game {
 			} else if(direction.equals("west")){
 				y -= 1;
 			}
-			//I apologize
-			if
-			(	
-				//hallway
-				(
-					//north south
-					(map[x][y].isSouth()&&map[x][y].isNorth()) && !(map[x][y].isEast()||map[x][y].isWest())
-				)||(
-					//east west
-					(map[x][y].isEast()&&map[x][y].isWest()) && !(map[x][y].isSouth()||map[x][y].isNorth())
-				)
-			)
-			{
-				GameScreen.addText("You are in a hallway");
-			}else if
-			(
-				//death chamber
-				!(map[x][y].isSouth()||map[x][y].isNorth()||map[x][y].isEast()||map[x][y].isWest())
-			)
-			{
-				GameScreen.addText("You are ... in a small room with no exit");
-			}else if
-			(
-				//all four exits
-				map[x][y].isSouth()&&map[x][y].isNorth()&&map[x][y].isEast()&&map[x][y].isWest()
-			)
-			{
-				GameScreen.addText("You are in a large room of which you cannot see the sides in the dark");
-			}else if
-			(
-				//dead end
-				(
-					//north exit
-					map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
-				)||(
-					//south exit
-					!map[x][y].isNorth()&&map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
-				)||(
-					//east exit
-					!map[x][y].isNorth()&&!map[x][y].isSouth()&&map[x][y].isEast()&&!map[x][y].isWest()
-				)||(
-					//west exit
-					!map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&map[x][y].isWest()
-				)
-			)
-			{
-				GameScreen.addText("You have hit a dead end, the only exit is from whence you came");
-			}else{
-				GameScreen.addText("You have a wall on one side, the others are shrouded in darkness");
-			}
+			room_text();
 		}
 		compass_setter(true);
 		System.out.println("x: " + x + " y: " + y);
+	}
+	public static void room_text(){
+		//I apologize
+		if
+		(	
+			//hallway
+			(
+				//north south
+				(map[x][y].isSouth()&&map[x][y].isNorth()) && !(map[x][y].isEast()||map[x][y].isWest())
+			)||(
+				//east west
+				(map[x][y].isEast()&&map[x][y].isWest()) && !(map[x][y].isSouth()||map[x][y].isNorth())
+			)
+		)
+		{
+			GameScreen.addText("You are in a hallway");
+		}else if
+		(
+			//death chamber
+			!(map[x][y].isSouth()||map[x][y].isNorth()||map[x][y].isEast()||map[x][y].isWest())
+		)
+		{
+			GameScreen.addText("You are ... in a small room with no exit");
+		}else if
+		(
+			//all four exits
+			map[x][y].isSouth()&&map[x][y].isNorth()&&map[x][y].isEast()&&map[x][y].isWest()
+		)
+		{
+			GameScreen.addText("You are in a large room of which you cannot see the sides in the dark");
+		}else if
+		(
+			//dead end
+			(
+				//north exit
+				map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
+			)||(
+				//south exit
+				!map[x][y].isNorth()&&map[x][y].isSouth()&&!map[x][y].isEast()&&!map[x][y].isWest()
+			)||(
+				//east exit
+				!map[x][y].isNorth()&&!map[x][y].isSouth()&&map[x][y].isEast()&&!map[x][y].isWest()
+			)||(
+				//west exit
+				!map[x][y].isNorth()&&!map[x][y].isSouth()&&!map[x][y].isEast()&&map[x][y].isWest()
+			)
+		)
+		{
+			GameScreen.addText("You have hit a dead end, the only exit is from whence you came");
+		}else{
+			GameScreen.addText("You have a wall on one side, the others are shrouded in darkness");
+		}
+		if(map[x][y].isExit()){
+			GameScreen.addText("You see a ladder hanging from the ceiling");
+		}
 	}
 	public static void compass_setter(boolean on){
 		if(on){
