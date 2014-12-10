@@ -317,7 +317,8 @@ public class Gameplay {
 			} 
 			while(characters.party.get(characterIndex).getHasPotion() == true || counter < 100);
 			characters.party.get(characterIndex).setHasPotion(true);
-			GameScreen.addText(characters.party.get(characterIndex).getName() + " picked up a potion!");
+			GameScreen.addText(characters.party.get(characterIndex).getName() + " picked up a potion...");
+			GameScreen.addText("you don't think it would be safe to drink considering where you got it.");
 		}
 	}//End Search
 	
