@@ -23,7 +23,7 @@ import javax.swing.text.DefaultCaret;
 public class GameScreen extends JFrame {
 
 	private final static int WIDTH = 1024;
-	private final static int HEIGHT = 768;
+	private final static int HEIGHT = 725;
 	private JPanel gamePanel;
 	private JPanel compassPanel;
 	private JLabel startScreenBackgroundLabel;
