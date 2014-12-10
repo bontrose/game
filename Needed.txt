@@ -5,7 +5,6 @@ buttons
   fight choices(yes/no)
   press enter - currently command line
   Fight - Search - Run - Sleep
-Rooms should have description
 item wear(i honestly don't know if this has been done)
 spell cooldown
 potion use
@@ -23,9 +22,11 @@ starting room
   does not always work
 fight
   some things need to be ported to buttons
-  does not start back up if you enter a new room via gui
+  if you run(which now works) it doesn't save the monsters
 looting
-  still uses 10 intel
+  still uses 10 intel, i think.
+room description
+  not the best, kinda works though
   
 
 --skipping--

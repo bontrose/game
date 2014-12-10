@@ -8,14 +8,19 @@ public class game {
 	static room[][] map;
 	static FlizbazArrayList<characters> Players;
 	static FlizbazArrayList<characters> Monsters;
-	static char d;
+	static String d;
 	public static int x = 0;
 	public static int y = 0; // position
 	static Random Die = new Random();
 	private static boolean turnused=false;
 	private static String yn="";
 	static GameScreen screen;
-	
+	public static void canFight(){
+		if(map[x][y].isFight()){
+			map[x][y].setFight(false);
+			Gameplay.fight(characters.party, map[x][y].getmonsters());
+		}
+	}
 	public static void main(String[] args) {
 		 screen =new GameScreen();
 		init();
@@ -23,10 +28,7 @@ public class game {
 		Scanner in = new Scanner(System.in);
 		
 		while(!(quit)){
-			if(map[x][y].isFight()){
-				map[x][y].setFight(false);
-				Gameplay.fight(characters.party, map[x][y].getmonsters());
-			}
+			canFight();
 			//Fight has to first and isEmpty second
 			if(characters.party.isEmpty()){
 				GameScreen.addText("EVERYONE IS DEAD YOU LOSE");
@@ -52,30 +54,6 @@ public class game {
 					quit=true;
 					turnused=true;
 				}
-			}
-			if(!turnused&&map[x][y].isEast()){
-				System.out.print("would you like to Exit east? y/n");
-				yn=in.next();
-				yn=yn.toLowerCase();
-				moveAsTurn("east");
-			}
-			if(!turnused&&map[x][y].isWest()){
-				System.out.print("would you like to exit west? y/n");
-				yn=in.next();
-				yn=yn.toLowerCase();
-				moveAsTurn("west");
-			}
-			if(!turnused&&map[x][y].isNorth()){
-				System.out.print("would you like to exit north? y/n");
-				yn=in.next();
-				yn=yn.toLowerCase();
-				moveAsTurn("north");
-			}
-			if(!turnused&&map[x][y].isSouth()){
-				System.out.print("would you like to exit south? y/n");
-				yn=in.next();
-				yn=yn.toLowerCase();
-				moveAsTurn("south");
 			}
 			turnused = false;
 		}
@@ -115,9 +93,7 @@ public class game {
 		for(int x2=0; x2<PCnum; x2++){
 			GameScreen.addText("player "+(x2+1)+" name: ");
 			name=in.next();
-			GameScreen.addText("0:Fighter");
-			GameScreen.addText("1:Thief");
-			GameScreen.addText("2:Wizard");
+			GameScreen.addText("0:Fighter    1:Thief     2:Wizard");
 			do{
 				GameScreen.addText("class number): ");
 				try{
@@ -142,7 +118,9 @@ public class game {
 		compass_setter(true);
 		room_text();
 	}
-	
+	public static void moveAsTurn(){
+		moveAsTurn(d);
+	}
 	public static void moveAsTurn(String direction){
 		boolean moveable=false;
 		//stops movement text when no movement is done
@@ -161,12 +139,16 @@ public class game {
 			//Gameplay.move(map, 's', x, y);
 			if(direction.equals("north")){
 				x -= 1;
+				d="south";
 			} else if(direction.equals("south")){
 				x += 1;
+				d="north";
 			} else if(direction.equals("east")){
 				y += 1;
+				d="west";
 			} else if(direction.equals("west")){
 				y -= 1;
+				d="east";
 			}
 			room_text();
 		}
