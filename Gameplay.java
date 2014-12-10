@@ -259,7 +259,7 @@ public class Gameplay {
 			}
 		}
 				
-		game.map[game.x][game.y].setFight(false);
+		game.map[game.x][game.y].setFight(true);
 		game.moveAsTurn();
 	}//End Run
 	

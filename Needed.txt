@@ -21,7 +21,7 @@ starting room
   does not always work
 fight
   some things need to be ported to buttons
-  if you run(which now works) it doesn't save the monsters
+  if you run monsters names are actually the entity id
 looting
   still uses 10 intel, i think.
 room description
