@@ -9,7 +9,6 @@ item wear(i honestly don't know if this has been done)
 spell cooldown
 potion use
 
-
 --needs work--
 Run
   can't run
