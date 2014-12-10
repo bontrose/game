@@ -5,7 +5,6 @@ buttons
   fight choices(yes/no)
   press enter - currently command line
   Fight - Search - Run - Sleep
-item wear(i honestly don't know if this has been done)
 spell cooldown
 potion use
 
@@ -16,12 +15,13 @@ cast spell
   cooldown
 gamescreen textbox
   player editable
-  needs text for loading room/ makinvg players(may do windows file choice for loading mazes
+  needs text for loading room(may do windows file choice for loading mazes
 starting room
-  does not always work
+  does not always choose right one(seems consistant though)[i vote we call this a feature]
 fight
   some things need to be ported to buttons
-  if you run(which now works) it doesn't save the monsters
+  if you run monsters names are actually the entity id
+  last npc may not count to fight cap
 looting
   still uses 10 intel, i think.
 room description

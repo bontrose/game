@@ -247,8 +247,8 @@ public class Gameplay {
 			}
 		}
 				
-		game.map[game.x][game.y].setFight(false);
-		game.moveAsTurn(d);
+		game.map[game.x][game.y].setFight(true);
+		game.moveAsTurn();
 	}//End Run
 	
 	public static void move(room[][] theMap, char d2, int x, int y){
