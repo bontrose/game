@@ -9,7 +9,7 @@ Rooms should have description
 item wear(i honestly don't know if this has been done)
 spell cooldown
 potion use
-hit/miss"1D20 > targets Dexterity - if target is doing a range attack, roll 1D15"
+
 
 --needs work--
 Run
@@ -18,7 +18,6 @@ cast spell
   cooldown
 gamescreen textbox
   player editable
-  needs auto scroll
   needs text for loading room/ makinvg players(may do windows file choice for loading mazes
 starting room
   does not always work
@@ -33,6 +32,8 @@ looting
 memorize spell
 
 --done--
+hit/miss"1D20 > targets Dexterity - if target is doing a range attack, roll 1D15"
+needs auto scroll
 Search
 cast spell
 melee attack

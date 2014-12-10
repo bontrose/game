@@ -74,9 +74,13 @@ public class PlayerCharacter extends characters {
 		return damage;
 	}
 	public int rangeAttack(characters target, int targetID) {
-		int damage = (this.dexterity/3) + weapon.getModifier() - target.armor.getModifier();
-		if(damage==0){
-			damage=1;
+		int damage = 0;
+		int miss = dice.nextInt(20);
+		if(miss < target.dexterity){
+			damage = 0;
+		}
+		else{
+			damage = (this.dexterity/3) + weapon.getModifier() - target.armor.getModifier();
 		}
 		target.currentHP -= damage;
 		return damage;

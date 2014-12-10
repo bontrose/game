@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 
 @SuppressWarnings("serial")
 public class GameScreen extends JFrame {
@@ -114,6 +115,8 @@ public class GameScreen extends JFrame {
 		panelHolder.setBackground(Color.BLACK);
 		panelHolder.add(scrollPane);
 		gamePanel.add(panelHolder, BorderLayout.CENTER);
+		DefaultCaret caret = (DefaultCaret)display.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 	}
 	public static void addText(String stringToAdd){
 		display.append(stringToAdd + "\n");

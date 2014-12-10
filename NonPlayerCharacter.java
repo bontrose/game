@@ -167,7 +167,14 @@ public class NonPlayerCharacter extends characters
 		return damage;
 	}
 	public int rangeAttack(characters target, int targetID) {
-		int damage = (this.dexterity/3) + weapon.getModifier() - target.armor.getModifier();
+		int damage = 0;
+		int miss = random.nextInt(20);
+		if(miss < target.dexterity){
+			damage = 0;
+		}
+		else{
+			damage = (this.dexterity/3) + weapon.getModifier() - target.armor.getModifier();
+		}
 		target.currentHP -= damage;
 		return damage;
 	}
