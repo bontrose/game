@@ -23,7 +23,7 @@ import javax.swing.text.DefaultCaret;
 public class GameScreen extends JFrame {
 
 	private final static int WIDTH = 1024;
-	private final static int HEIGHT = 725;
+	private final static int HEIGHT = 768;
 	private JPanel gamePanel;
 	private JPanel compassPanel;
 	private JLabel startScreenBackgroundLabel;
@@ -36,14 +36,14 @@ public class GameScreen extends JFrame {
 	public JButton south;
 	public JButton east;
 	public JButton west;
+	JButton fight;
+	JButton search ;
+	JButton run;
+	JButton sleep;
 	private boolean startMenuExists = true;
 	private boolean startMenu = false;
 	private Image startScreen;
 	private Image background;
-	//DEBUG
-	public static void main(String[] args){
-		new GameScreen();
-	}
 	
 	public GameScreen(){
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -118,6 +118,26 @@ public class GameScreen extends JFrame {
 		DefaultCaret caret = (DefaultCaret)display.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 	}
+	
+	public void drawChoices() {
+		JPanel panel = new JPanel();
+		JPanel choices = new JPanel();
+		choices.setLayout(new BorderLayout());
+		fight = new JButton("Fight");
+		search = new JButton("Search");
+		run = new JButton("Run");
+		sleep = new JButton("Sleep");
+		
+		panel.add(choices);
+		
+		choices.add(fight, BorderLayout.NORTH);
+		choices.add(search, BorderLayout.SOUTH);
+		choices.add(run, BorderLayout.EAST);
+		choices.add(sleep, BorderLayout.WEST);
+		
+		panel.setBackground(Color.BLACK);
+		gamePanel.add(panel, BorderLayout.NORTH);
+	}
 	public static void addText(String stringToAdd){
 		display.append(stringToAdd + "\n");
 	}
@@ -130,7 +150,9 @@ public class GameScreen extends JFrame {
 		gamePanel.remove(startScreenBackgroundLabel);
 		gamePanel.setBackground(Color.BLACK);
 		drawCompass();
+		drawChoices();
 		drawGameText();
+		
 		revalidate();
 	}
 	
@@ -198,7 +220,23 @@ public class GameScreen extends JFrame {
 			
 		}
 	}
-	
+	public class choicesListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==fight){
+			
+			}	else if(e.getSource()==search){
+				
+			}	else if(e.getSource()==run){
+			
+			}	else if(e.getSource()==sleep){
+				
+			}
+			
+		}
+		
+	}
 	public void setNorth(boolean on){
 		north.setEnabled(on);
 	}
