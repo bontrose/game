@@ -23,7 +23,7 @@ import javax.swing.text.DefaultCaret;
 public class GameScreen extends JFrame {
 
 	private final static int WIDTH = 1024;
-	private final static int HEIGHT = 768;
+	private final static int HEIGHT = 725;
 	private JPanel gamePanel;
 	private JPanel compassPanel;
 	private JLabel startScreenBackgroundLabel;
@@ -103,6 +103,7 @@ public class GameScreen extends JFrame {
 		compassPanel.setBackground(Color.BLACK);
 		gamePanel.add(panelHolder, BorderLayout.SOUTH);
 	}
+	
 	public void drawGameText() {
 		display = new JTextArea("");
 		display.setForeground(Color.WHITE);
@@ -138,6 +139,7 @@ public class GameScreen extends JFrame {
 		panel.setBackground(Color.BLACK);
 		gamePanel.add(panel, BorderLayout.NORTH);
 	}
+
 	public static void addText(String stringToAdd){
 		display.append(stringToAdd + "\n");
 	}
@@ -220,6 +222,7 @@ public class GameScreen extends JFrame {
 			
 		}
 	}
+	
 	public class choicesListener implements ActionListener {
 
 		@Override
@@ -237,6 +240,7 @@ public class GameScreen extends JFrame {
 		}
 		
 	}
+	
 	public void setNorth(boolean on){
 		north.setEnabled(on);
 	}

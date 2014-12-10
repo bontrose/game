@@ -14,6 +14,7 @@ public class Gameplay {
 	
 	public static void fight(FlizbazArrayList<PlayerCharacter> players, FlizbazArrayList<NonPlayerCharacter> npcs){
 		//Initiative
+		boolean ran=false;
 		game.compass_setter(false);
 		Stack<characters> initiative = new Stack<characters>();
 		for(int highestDex = 0; highestDex < 20; highestDex++){
@@ -42,7 +43,7 @@ public class Gameplay {
 		int turns = 0;
 		while(!(npcs.isEmpty()) && !(players.isEmpty())){
 			
-			scan.nextLine();
+			//scan.nextLine();
 			//Monster turn
 			if(initiative.peek().isMonster()){
 				boolean monsterTurn = true;
@@ -91,6 +92,7 @@ public class Gameplay {
 					GameScreen.addText("Run away? y/n");
 					if(scan.next().toLowerCase().equals("y")){
 						run(players, npcs);
+						ran=true;
 						break;
 					}
 					
@@ -106,6 +108,9 @@ public class Gameplay {
 								scan = new Scanner(System.in);
 							}
 						}while(!playerCastingSpell);
+					}
+					if(ran){
+						break;
 					}
 					GameScreen.addText("Type in the name of the monster you want to attack");
 					String targetString = scan.next();
@@ -159,6 +164,9 @@ public class Gameplay {
 						//Input error
 					}
 				}
+				if (ran){
+					break;
+				}
 	
 			}
 			
@@ -185,9 +193,13 @@ public class Gameplay {
 				GameScreen.addText("Monsters: " + strBd);
 			}
 		}
+		if(ran){
+			
+		}else{
 		npcs.clear();
 		GameScreen.addText("Fight is done");
 		game.compass_setter(true);
+		}
 	}//End Fight
 	
 	public static void pickUpItems(Stack<characters> initiative, int size)
@@ -246,28 +258,9 @@ public class Gameplay {
 				players.get(target).destruct();
 			}
 		}
-				
 		game.map[game.x][game.y].setFight(true);
 		game.moveAsTurn();
 	}//End Run
-	
-	public static void move(room[][] theMap, char d2, int x, int y){
-		d2=Character.toUpperCase(d2);
-
-		if(d2=='N'){
-			x-=1;
-			d="S";
-		} else if(d2=='S'){
-			x+=1;
-			d="N";
-		} else if(d2=='E'){
-			y+=1;
-			d="W";
-		} else if(d2=='W'){
-			y-=1;
-			d="E";
-		}
-	}//End Move
 	
 	public static void sleep()
 	{
