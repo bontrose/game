@@ -225,5 +225,11 @@ public class game {
 			screen.setWest(false);
 		}
 	}
+	public static void option_setter(boolean on){
+//		screen.setfight(!(on));
+//		screen.setsearch(on);
+//		screen.setrun(!(on));
+//		screen.setsleep(on);
+	}
 	
 }
